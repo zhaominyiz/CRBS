@@ -6,7 +6,7 @@ def solve(filename):
     code=filetools.readCode(filename,"tmp")
     # str="".join(code)+"\n"+"".join(analize)
     # print(str)
-    code = solveFirst(code,filename)
+    code = solveFirst(code, filename)
     code = solveSecond(code, filename)
     # code = solveThird(code, filename)
     # solveFirst(code,filename)
@@ -215,12 +215,18 @@ def solveSecond(code,filename):
                 continue
             if i == 'class':
                 classflag = True
+                constflag = False
+                memberflag = False
             elif i == 'final':
                 constflag = True
+                classflag = False
+                memberflag = False
             elif i == 'static':
                 continue
             elif i in base:
                 memberflag = True
+                classflag = False
+                constflag = False
             elif i in keyword:
                 continue
             else:
@@ -231,25 +237,33 @@ def solveSecond(code,filename):
                 else:
                     membername.append(i)
     result = []
+
     print("classname")
     print(classname)
     print("const:")
     print(constname)
     print("bianliang:")
     print(membername)
+
     for codes in code:
+        print("codes:"+codes)
         tmp = re.split('[ ;]', codes)
         tmpresult = ''
         # print('tmp')
         # print(tmp)
+        cur = 0
         for i in tmp:
-            # print("i:" + i)
+            while codes[cur] == ' ':
+                tmpresult += ' '
+                cur = cur + 1
+            cur = cur + len(i)
             if i in keyword:
                 tmpresult += i
             elif i in constname:
                 tmp1 = i.upper()
                 tmpresult += tmp1
-            elif i in classname:
+            elif (i in classname) or (len(i) > 1 and i[-1] == '{' and i[:-1] in classname) or \
+                    (len(i) > 3 and i[-1] == '\n' and i[-2] == '{' and i[:-2] in classname):
                 tmp1 = i[:1].upper() + i[1:].lower()
                 for j in words:
                     index = tmp1.find(j)
@@ -268,12 +282,11 @@ def solveSecond(code,filename):
                 tmpresult += tmp1
             else:
                 tmpresult += i
-            tmpresult += ' '
         result.append(tmpresult)
     for code in result:
         print(code, end='')
-    filetools.writetxt()
-    return result
+
+    return filetools.writetxt(filename,"result",result)
 
 #解决需求3的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 #TODO 实现本函数
