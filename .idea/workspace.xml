@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2903736-e227-493a-b90b-65e08c540a39" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/words.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CodeRebuild/codetools.py" beforeDir="false" afterPath="$PROJECT_DIR$/CodeRebuild/codetools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeRebuild/filetools.py" beforeDir="false" afterPath="$PROJECT_DIR$/CodeRebuild/filetools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp/Mq4sTbK6hm1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp/Mq4sTbK6hm1.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +20,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CodeRebuild/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
+            <state relative-caret-position="209">
               <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -35,21 +32,31 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CodeRebuild/codetools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+            <state relative-caret-position="137">
+              <caret line="274" column="23" selection-start-line="274" selection-start-column="23" selection-end-line="274" selection-end-column="23" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#507#572#0" />
-                <element signature="e#610#5658#0" />
+                <element signature="e#611#5788#0" />
+                <element signature="e#3890#5710#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/result/BUFEM0B6j8I.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/result/SJTq6te69nW.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CodeRebuild/filetools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
+            <state relative-caret-position="893">
               <caret line="49" column="30" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
@@ -96,8 +103,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="25" />
-    <option name="y" value="65" />
+    <option name="x" value="532" />
+    <option name="y" value="305" />
     <option name="width" value="1750" />
     <option name="height" value="980" />
   </component>
@@ -107,6 +114,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -117,34 +125,41 @@
             <path>
               <item name="CRBS" type="b2602c69:ProjectViewProjectNode" />
               <item name="CRBS" type="462c0819:PsiDirectoryNode" />
-              <item name="CodeRebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="result" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CRBS" type="b2602c69:ProjectViewProjectNode" />
               <item name="CRBS" type="462c0819:PsiDirectoryNode" />
-              <item name="CodeRebuild" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+              <item name="tmp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CRBS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CRBS" type="462c0819:PsiDirectoryNode" />
+              <item name="Utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Utils" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\10447\PycharmProjects\CRBS\Utils" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\10447\PycharmProjects\CRBS" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\10447\PycharmProjects\CRBS\Utils" />
     </key>
   </component>
@@ -199,12 +214,21 @@
       <workItem from="1559297528292" duration="7778000" />
       <workItem from="1559311071915" duration="679000" />
       <workItem from="1559311830246" duration="2560000" />
-      <workItem from="1559363383888" duration="28804000" />
+      <workItem from="1559363383888" duration="28913000" />
+      <workItem from="1559473977943" duration="2366000" />
     </task>
+    <task id="LOCAL-00001" summary="完成了代码格式部分的编写，下面需要对其进行单元测试&#10;赵珉怿 19.6.1">
+      <created>1559402469541</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1559402469541</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39821000" />
+    <option name="totallyTimeSpent" value="42296000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -216,10 +240,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25938338" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2627346" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -312,208 +336,42 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/CRBS" />
     </ignored-roots>
+    <MESSAGE value="完成了代码格式部分的编写，下面需要对其进行单元测试&#10;赵珉怿 19.6.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成了代码格式部分的编写，下面需要对其进行单元测试&#10;赵珉怿 19.6.1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tmp/AysJWfrfqyQ.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="29" column="102" selection-start-line="29" selection-start-column="102" selection-end-line="29" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/AysJWfrfqyQ.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="15" lean-forward="true" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/LZtorGH6RqQ.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/dGVzVFRudzI.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/dGVzVFRudzI.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="82" selection-start-line="14" selection-start-column="76" selection-end-line="14" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/YLI7JMMTXC8.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="10" lean-forward="true" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/3mKyfku8T8j.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/C3Bv9cZrCal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/C3Bv9cZrCal.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/3mKyfku8T8j.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="31" column="81" selection-start-line="31" selection-start-column="81" selection-end-line="31" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/3mKyfku8T8j.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="10" lean-forward="true" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CodeRebuild/filetools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="49" column="30" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/UNlEyW4cQF6.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/Ql4brCSOlWW.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/jM9gDT7nqpz.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/jM9gDT7nqpz.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/zP2b7W5AQnT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/3e1EKBsvnp2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="8" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/6SyrVR5NqXd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/DieeR1LAELN.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/gLceMddLWZe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/J4r7sca0Vxm.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/BptNNPKoodr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/J4r7sca0Vxm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/J4r7sca0Vxm.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/jMiLgS7kDma.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="4" lean-forward="true" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/LidFQWqL0L4.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/3e1EKBsvnp2.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/7pQ3EKPBLkb.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/7pQ3EKPBLkb.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/w7XA3LnINgE.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/29gy4IO8Amg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/PIiT4fhOaZA.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/atzGEpILgcA.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/atzGEpILgcA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/result/LZtorGH6RqQ.java" />
+    <entry file="file://$PROJECT_DIR$/result/dGVzVFRudzI.java" />
+    <entry file="file://$PROJECT_DIR$/tmp/dGVzVFRudzI.txt" />
+    <entry file="file://$PROJECT_DIR$/result/YLI7JMMTXC8.java" />
+    <entry file="file://$PROJECT_DIR$/tmp/3mKyfku8T8j.java" />
+    <entry file="file://$PROJECT_DIR$/result/C3Bv9cZrCal.java" />
+    <entry file="file://$PROJECT_DIR$/tmp/C3Bv9cZrCal.txt" />
+    <entry file="file://$PROJECT_DIR$/tmp/3mKyfku8T8j.txt" />
+    <entry file="file://$PROJECT_DIR$/result/3mKyfku8T8j.java" />
+    <entry file="file://$PROJECT_DIR$/result/UNlEyW4cQF6.java" />
+    <entry file="file://$PROJECT_DIR$/result/Ql4brCSOlWW.java" />
+    <entry file="file://$PROJECT_DIR$/tmp/jM9gDT7nqpz.java" />
+    <entry file="file://$PROJECT_DIR$/result/jM9gDT7nqpz.java" />
+    <entry file="file://$PROJECT_DIR$/result/zP2b7W5AQnT.java" />
+    <entry file="file://$PROJECT_DIR$/result/3e1EKBsvnp2.java" />
+    <entry file="file://$PROJECT_DIR$/result/6SyrVR5NqXd.java" />
+    <entry file="file://$PROJECT_DIR$/result/DieeR1LAELN.java" />
+    <entry file="file://$PROJECT_DIR$/result/gLceMddLWZe.java" />
+    <entry file="file://$PROJECT_DIR$/result/J4r7sca0Vxm.java" />
+    <entry file="file://$PROJECT_DIR$/result/BptNNPKoodr.java" />
+    <entry file="file://$PROJECT_DIR$/tmp/J4r7sca0Vxm.java" />
+    <entry file="file://$PROJECT_DIR$/tmp/J4r7sca0Vxm.txt" />
+    <entry file="file://$PROJECT_DIR$/result/jMiLgS7kDma.java" />
+    <entry file="file://$PROJECT_DIR$/result/LidFQWqL0L4.java" />
+    <entry file="file://$PROJECT_DIR$/tmp/3e1EKBsvnp2.java" />
+    <entry file="file://$PROJECT_DIR$/tmp/7pQ3EKPBLkb.txt" />
+    <entry file="file://$PROJECT_DIR$/result/7pQ3EKPBLkb.java" />
+    <entry file="file://$PROJECT_DIR$/result/w7XA3LnINgE.java" />
+    <entry file="file://$PROJECT_DIR$/result/29gy4IO8Amg.java" />
+    <entry file="file://$PROJECT_DIR$/result/PIiT4fhOaZA.java" />
+    <entry file="file://$PROJECT_DIR$/tmp/atzGEpILgcA.txt" />
+    <entry file="file://$PROJECT_DIR$/result/atzGEpILgcA.java" />
     <entry file="file://E:/Program Files (x86)/Microsoft Visual Studio/Shared/Python36_64/Lib/sre_parse.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
@@ -535,49 +393,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/0waTDQGXKF4.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="110" selection-start-line="9" selection-start-column="102" selection-end-line="9" selection-end-column="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/0waTDQGXKF4.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/3Kak7BtlPkl.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/Z25Q5prnkAA.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/H2zQBYdYaWF.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="13" lean-forward="true" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/wgcgJFpSL2h.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/n0uETW7ouM8.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/k1LsLtJBamW.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="44" lean-forward="true" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tmp/0waTDQGXKF4.txt" />
+    <entry file="file://$PROJECT_DIR$/result/0waTDQGXKF4.java" />
+    <entry file="file://$PROJECT_DIR$/result/3Kak7BtlPkl.java" />
+    <entry file="file://$PROJECT_DIR$/result/Z25Q5prnkAA.java" />
+    <entry file="file://$PROJECT_DIR$/result/H2zQBYdYaWF.java" />
+    <entry file="file://$PROJECT_DIR$/result/wgcgJFpSL2h.java" />
+    <entry file="file://$PROJECT_DIR$/result/n0uETW7ouM8.java" />
+    <entry file="file://$PROJECT_DIR$/result/k1LsLtJBamW.java" />
+    <entry file="file://$PROJECT_DIR$/result/MTqwFNSH32p.java" />
+    <entry file="file://$PROJECT_DIR$/tmp/k1LsLtJBamW.java" />
+    <entry file="file://$PROJECT_DIR$/result/ZK37mJaqqXN.java" />
     <entry file="file://$PROJECT_DIR$/CodeRebuild/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
+        <state relative-caret-position="209">
           <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
@@ -585,35 +414,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/result/MTqwFNSH32p.java">
+    <entry file="file://$PROJECT_DIR$/CodeRebuild/filetools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+        <state relative-caret-position="893">
+          <caret line="49" column="30" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/k1LsLtJBamW.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/result/SJTq6te69nW.java">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/result/ZK37mJaqqXN.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="15" lean-forward="true" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/result/BUFEM0B6j8I.java">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/CodeRebuild/codetools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+        <state relative-caret-position="137">
+          <caret line="274" column="23" selection-start-line="274" selection-start-column="23" selection-end-line="274" selection-end-column="23" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#507#572#0" />
-            <element signature="e#610#5658#0" />
+            <element signature="e#611#5788#0" />
+            <element signature="e#3890#5710#0" />
           </folding>
         </state>
       </provider>

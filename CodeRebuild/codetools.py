@@ -7,7 +7,7 @@ def solve(filename):
     # str="".join(code)+"\n"+"".join(analize)
     # print(str)
     code = solveFirst(code,filename)
-    # code = solveSecond(code, filename)
+    code = solveSecond(code, filename)
     # code = solveThird(code, filename)
     # solveFirst(code,filename)
     return HttpResponse("Success")
@@ -178,13 +178,102 @@ def solveFirst(code,filename):
         j+=1
 
     filetools.writetxt(filename,"result",code)
-
+    return filetools.readCode(filename,"result")
 
 #解决需求2的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 #TODO 实现本函数
 def solveSecond(code,filename):
     analize = filetools.checkstyle(filename,"result")
-    return
+    file1 = open(os.path.join("words.txt"), 'r', encoding='UTF-8')
+    # words = ['banana', 'apple', 'number']
+    words = []
+    line = file1.readline()
+    while line:
+        line = file1.readline()
+        words.append(line[:len(line) - 1])
+        # words.append("'"+line+"'")
+    # words.append('banana')
+    print(words)
+    membername = []
+    classname = []
+    constname = []
+    # 注释问题
+    keyword = ['abstract', 'assert', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'class', 'const', 'continue',
+               'default', 'do', 'double', 'else', 'enum', 'extends', 'final', 'finally', 'float', 'for', 'goto', 'if',
+               'implements', 'import', 'instanceof', 'int', 'interface', 'long', 'native', 'new', 'package', 'private',
+               'protected', 'public', 'return', 'short', 'static', 'strictfp', 'super', 'switch', 'synchronized',
+               'this',
+               'throw', 'throws', 'transient', 'try', 'void', 'volatile', 'while']
+    base = ['byte', 'short', 'int', 'long', 'float', 'double', 'boolean', 'char']
+    for codes in code:
+        classflag = False
+        constflag = False
+        memberflag = False
+        tmp = re.split('[ ;]', codes)
+        for i in tmp:
+            if i.isalnum() == False or len(i) == 0 or (i[0] >= '0' and i[0] <= '9'):
+                continue
+            if i == 'class':
+                classflag = True
+            elif i == 'final':
+                constflag = True
+            elif i == 'static':
+                continue
+            elif i in base:
+                memberflag = True
+            elif i in keyword:
+                continue
+            else:
+                if classflag:
+                    classname.append(i)
+                elif constflag:
+                    constname.append(i)
+                else:
+                    membername.append(i)
+    result = []
+    print("classname")
+    print(classname)
+    print("const:")
+    print(constname)
+    print("bianliang:")
+    print(membername)
+    for codes in code:
+        tmp = re.split('[ ;]', codes)
+        tmpresult = ''
+        # print('tmp')
+        # print(tmp)
+        for i in tmp:
+            # print("i:" + i)
+            if i in keyword:
+                tmpresult += i
+            elif i in constname:
+                tmp1 = i.upper()
+                tmpresult += tmp1
+            elif i in classname:
+                tmp1 = i[:1].upper() + i[1:].lower()
+                for j in words:
+                    index = tmp1.find(j)
+                    if index != -1:
+                        pass
+                        tmp1 = tmp1.replace(j, j.title())
+
+                tmpresult += tmp1
+            elif i in membername:
+                tmp1 = i.lower()
+                for j in words:
+                    index = tmp1.find(j)
+                    if index == -1:
+                        continue
+                    tmp1 = tmp1.replace(j, j.title())
+                tmpresult += tmp1
+            else:
+                tmpresult += i
+            tmpresult += ' '
+        result.append(tmpresult)
+    for code in result:
+        print(code, end='')
+    filetools.writetxt()
+    return result
 
 #解决需求3的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 #TODO 实现本函数
