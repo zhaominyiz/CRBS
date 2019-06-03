@@ -4,9 +4,11 @@ import re
 from django.http import HttpResponse
 def solve(filename):
     code = filetools.readCode(filename,"tmp")
+
     code = solveFirst(code,filename)
-    code = solveSecond(code, filename)
-    # code = solveThird(code, filename)
+    print(code)
+    #code = solveSecond(code, filename)
+    code = solveThird(code, filename)
     # solveFirst(code,filename)
     return HttpResponse("Success")
 
@@ -230,6 +232,8 @@ def solveFirst(code,filename):
 #解决需求2的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 #TODO 实现本函数
 def solveSecond(code,filename):
+    print("22222222222")
+    print(code)
     # analize = filetools.checkstyle(filename,"result")
     file1 = open(os.path.join("words.txt"), 'r', encoding='UTF-8')
     # words = ['banana', 'apple', 'number']
@@ -330,10 +334,130 @@ def solveSecond(code,filename):
         print(code, end='')
     return filetools.writetxt(filename, "result", result)
 
+#我要找到后括号在啥子鬼地方
+def findhkh(code, st, i):
+    str=code[i].split(st,1)[0]+'}'
+    i+=1
+    while i<len(code):
+        if re.match(str,code[i]):
+            return i
+        i+=1
+    return -1
 
 #解决需求3的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 #TODO 实现本函数
 def solveThird(code,filename):
-    analize = filetools.checkstyle(filename,"result")
+    base = ['byte', 'short', 'int', 'long', 'float', 'double', 'boolean', 'char', 'integer']
+    print("3333333333sth  !!!   code:")
+    multiif_to_if = -1
+    for_to_while = -1
+    switch_to_if = 1
+    #0:不执行，1：正向过程，-1：逆向过程
+    cur=0
+    while cur < len(code):
+        if code[cur]=='' or code[cur].strip()[0] == '/' :
+            cur+=1
+            continue
+
+        if for_to_while==1:
+            numkh=0
+            numyh=0
+            if re.match('for',code[cur].strip()):
+                strtmp = code[cur].split('(', 1)
+                strtmp.append(strtmp[1].rsplit(')', 1)[1])
+                strtmp[1] = strtmp[1].rsplit(')', 1)[0]
+                prechars = 'a'
+                i = 0
+                num = 0
+                tjs = ['']
+                while i < len(strtmp[1]):
+                    if strtmp[1][i] == '(':
+                        numkh += 1
+                    if strtmp[1][i] == ')':
+                        numkh -= 1
+                    if strtmp[1][i] == '"' and prechars != '\\':
+                        numyh += 1
+                    if strtmp[1][i] == ';' and numkh == 0 and numyh % 2 == 0:
+                        tjs.append('')
+                        num += 1
+                    else:
+                        tjs[num] += strtmp[1][i]
+                    i += 1
+                print(tjs)
+                j = findhkh(code,'for',cur)
+                if tjs[0] != '':
+                    code[cur] = tjs[0]+';\nwhile('+tjs[1]+')'
+                else:
+                    code[cur] = 'while('+tjs[1]+')'
+                if '{' not in strtmp[2]:
+                    code[cur]+=' {'
+                if tjs[2] != '':
+                    code[j] = tjs[2]+';'+code[j]
+        elif for_to_while == -1:
+            if re.match('while', code[cur].strip()):
+                content = ['','','']
+                content[1] = code[cur].split('(',1)[1].rsplit(')',1)[0]
+                fx=code[cur-1].strip().split(' ')
+                #注意！while转for是不可以把外面定义的变量拽进来的！因为定义域会变！可能导致错误！将来有空可以再来fix这部分，加检测。
+                if (fx[0] in base) and fx[1] in content[1].split(' '):
+                    #先扔着，原因如上！
+                    print('yesyesyes')
+                    j = findhkh(code,'while',cur)
+                    if j-1!=cur and fx[1] in re.split('[ +-]',code[j-1]):
+                        content[2] = code[j-1].rsplit(';',1)[0]
+                        code[j-1]=''
+                code[cur] = code[cur].split('while',1)[0]+'for('+content[0]+';'+content[1]+';'+content[2]+')'+code[cur].rsplit(')',1)[1]
+
+
+
+
+        if multiif_to_if==1:
+            numkh=0
+            numyh=0
+            if re.match('if',code[cur].strip()):
+                strtmp = code[cur].split('(', 1)
+                strtmp.append(strtmp[1].rsplit(')', 1)[1])
+                strtmp[1] = strtmp[1].rsplit(')', 1)[0]
+                prechars='a'
+                i=0
+                num=0
+                tjs=['']
+                while i<len(strtmp[1]):
+                    if strtmp[1][i] == '(':
+                        numkh+=1
+                    if strtmp[1][i] == ')':
+                        numkh-=1
+                    if strtmp[1][i] == '"' and prechars!='\\':
+                        numyh+=1
+                    if strtmp[1][i]=='&' and numkh==0 and numyh%2==0:
+                        tjs.append('')
+                        num+=1
+                        i+=1
+                    else:
+                        tjs[num]+=strtmp[1][i]
+                    i+=1
+                tmpresult=''
+                for strs in tjs:
+                    tmpresult+='if('+strs+')'
+                tmpresult+=strtmp[2]
+                code[cur]=tmpresult
+        elif multiif_to_if==-1:
+            if re.match('if', code[cur].strip()):
+                if re.match('if',code[cur+1].strip()):
+                    code[findhkh(code,'if',cur+1)]=''
+                    code[cur+1]=code[cur].rsplit(')',1)[0]+' && '+code[cur+1].split('(',1)[1]
+                    code[cur]=''
+                elif re.match('{',code[cur+1].strip()) and re.match('if',code[cur+2].strip()):
+                    code[findhkh(code, 'if', cur + 2)] = ''
+                    code[cur + 2] = code[cur].rsplit(')', 1)[0] + ' && ' + code[cur + 2].split('(', 1)[1]
+                    code[cur] = ''
+                    code[cur+1] = ''
+                    cur+=1
+
+
+        cur+=1
+    for codes in code:
+        print(codes)
+    #analize = filetools.checkstyle(filename,"result")
     return
 
