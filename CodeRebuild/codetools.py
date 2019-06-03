@@ -5,7 +5,7 @@ from django.http import HttpResponse
 def solve(filename):
     code = filetools.readCode(filename,"tmp")
     code = solveFirst(code,filename)
-    # code = solveSecond(code, filename)
+    code = solveSecond(code, filename)
     # code = solveThird(code, filename)
     # solveFirst(code,filename)
     return HttpResponse("Success")
@@ -20,8 +20,8 @@ def getBlock(cnt):
 #解决需求1的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 #此步应当解决代码格式问题
 def fixLeftAndEmpty(code):
-    for i in range(0,len(code)):
-        code[i]=code[i].lstrip()
+    for i in range(0 , len(code)):
+        code[i] = code[i].lstrip()
         flag = False
         print(code[i],len(code[i]))
         j=0
@@ -244,22 +244,20 @@ def solveSecond(code,filename):
     membername = []
     classname = []
     constname = []
+    sign = [' ', ',', ';', ':', '{', '}', '\n']
     # 注释问题
-    keyword = ['abstract', 'assert', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'class', 'const', 'continue',
-               'default', 'do', 'double', 'else', 'enum', 'extends', 'final', 'finally', 'float', 'for', 'goto', 'if',
+    keyword = ['abstract', 'assert', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'const', 'continue',
+               'default', 'do', 'double', 'else', 'enum', 'extends', 'finally', 'float', 'for', 'goto', 'if',
                'implements', 'import', 'instanceof', 'int', 'interface', 'long', 'native', 'new', 'package', 'private',
                'protected', 'public', 'return', 'short', 'static', 'strictfp', 'super', 'switch', 'synchronized',
-               'this',
-               'throw', 'throws', 'transient', 'try', 'void', 'volatile', 'while']
+               'this', 'throw', 'throws', 'transient', 'try', 'void', 'volatile', 'while']
     base = ['byte', 'short', 'int', 'long', 'float', 'double', 'boolean', 'char']
     for codes in code:
         classflag = False
         constflag = False
         memberflag = False
-        tmp = re.split('[ ;]', codes)
+        tmp = re.split('[} ;,:{\n]', codes)
         for i in tmp:
-            if i.isalnum() == False or len(i) == 0 or (i[0] >= '0' and i[0] <= '9'):
-                continue
             if i == 'class':
                 classflag = True
                 constflag = False
@@ -268,14 +266,12 @@ def solveSecond(code,filename):
                 constflag = True
                 classflag = False
                 memberflag = False
-            elif i == 'static':
+            elif i in keyword:
                 continue
             elif i in base:
                 memberflag = True
                 classflag = False
                 constflag = False
-            elif i in keyword:
-                continue
             else:
                 if classflag:
                     classname.append(i)
@@ -293,15 +289,14 @@ def solveSecond(code,filename):
     print(membername)
 
     for codes in code:
-        print("codes:"+codes)
-        tmp = re.split('[ ;]', codes)
+        tmp = re.split('[ ;,{}\n]', codes)
         tmpresult = ''
         # print('tmp')
         # print(tmp)
         cur = 0
         for i in tmp:
-            while codes[cur] == ' ':
-                tmpresult += ' '
+            while cur < len(codes) and codes[cur] in sign:
+                tmpresult += codes[cur]
                 cur = cur + 1
             cur = cur + len(i)
             if i in keyword:
@@ -309,15 +304,13 @@ def solveSecond(code,filename):
             elif i in constname:
                 tmp1 = i.upper()
                 tmpresult += tmp1
-            elif (i in classname) or (len(i) > 1 and i[-1] == '{' and i[:-1] in classname) or \
-                    (len(i) > 3 and i[-1] == '\n' and i[-2] == '{' and i[:-2] in classname):
+            elif i in classname:
                 tmp1 = i[:1].upper() + i[1:].lower()
                 for j in words:
                     index = tmp1.find(j)
                     if index != -1:
                         pass
                         tmp1 = tmp1.replace(j, j.title())
-
                 tmpresult += tmp1
             elif i in membername:
                 tmp1 = i.lower()
@@ -329,11 +322,13 @@ def solveSecond(code,filename):
                 tmpresult += tmp1
             else:
                 tmpresult += i
+        while cur < len(codes):
+            cur = cur + 1
+            tmpresult += codes[cur]
         result.append(tmpresult)
     for code in result:
         print(code, end='')
-
-    return filetools.writetxt(filename,"result",result)
+    return filetools.writetxt(filename, "result", result)
 
 
 #解决需求3的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
