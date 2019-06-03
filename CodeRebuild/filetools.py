@@ -54,7 +54,6 @@ def writetxt(name,folder,str):
             os.remove(os.path.join(folder, name))
         file = open(os.path.join(folder, name), 'a', encoding='UTF-8')
         for line in str:
-            # print("l="+line)
             file.write(line)
         file.close()
     except:

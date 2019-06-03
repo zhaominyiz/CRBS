@@ -3,16 +3,14 @@ import CodeRebuild.filetools as filetools
 import re
 from django.http import HttpResponse
 def solve(filename):
-    code=filetools.readCode(filename,"tmp")
-    # str="".join(code)+"\n"+"".join(analize)
-    # print(str)
-    code = solveFirst(code, filename)
-    code = solveSecond(code, filename)
+    code = filetools.readCode(filename,"tmp")
+    code = solveFirst(code,filename)
+    # code = solveSecond(code, filename)
     # code = solveThird(code, filename)
     # solveFirst(code,filename)
     return HttpResponse("Success")
 
-
+#生成空格的函数
 def getBlock(cnt):
     str=''
     for i in range(0,cnt):
@@ -21,19 +19,71 @@ def getBlock(cnt):
 
 #解决需求1的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 #此步应当解决代码格式问题
-#TODO 对此代码进行测试
-def solveFirst(code,filename):
+def fixLeftAndEmpty(code):
     for i in range(0,len(code)):
         code[i]=code[i].lstrip()
-        # print(code[i])
+        flag = False
+        print(code[i],len(code[i]))
+        j=0
+        while j<len(code[i]):
+
+            if code[i][j]=='\"':
+                flag =True
+                j+=1
+                continue
+            if code[i][j]=='\"' and flag and code[i][j-1]!='\\':
+                flag = False
+                j+=1
+                continue
+            if code[i][j]==' 'and code[i][j+1]==' ' and flag==False:
+                strlist = list(code[i])
+                del strlist[j+1]
+                code[i]="".join(strlist)
+                j-=1
+            if code[i][j] == ' ' and code[i][j + 1] == ';'and flag==False:
+                strlist = list(code[i])
+                del strlist[j]
+                code[i] = "".join(strlist)
+                j -= 1
+
+            j+=1
+    return code
+#TODO 对此代码进行测试
+def solveFirst(code,filename):
+
+    code = fixLeftAndEmpty(code)
     filetools.writetxt(filename,"result",code)
-    analize = filetools.checkstyle(filename,"result")
-    result = []
-    i=0
-    j=1
-    lazy=-1
-    lazy2=-1
+
+    #先去除一行的多条语句
+    for u in range(0,len(code)):
+        for v in range(0,len(code[u])):
+            if code[u][v]==';' and v>0 and code[u][v-1]!='\\' and code[u][v+1]!='\n':
+                strlist = list(code[u])
+                strlist.insert(v + 1,'\n')
+                code[u] = "".join(strlist)
+    for u in range(0,len(code)):
+        if 'case' in code[u] or 'default' in code[u]:
+            strlist = list(code[u])
+            tmp = 0
+            for v in range(0,len(code[u])):
+                if code[u][v]==':' and code[u][v-1]!='\\':
+                    tmp = v
+                    break
+            strlist.insert(tmp+1,'\n')
+            code[u] = "".join(strlist)
+
+
+    filetools.writetxt("1_"+filename, "result", code)
+    code = filetools.readCode("1_"+filename, "result")
+    analize = filetools.checkstyle("1_"+filename,"result")
+
+    i = 0
+    j = 1
+    lazy = -1
+    lazy2 = -1
     line_tag = 0
+
+    #再消除需要括号
     while True:
         #若完了
         if i>=len(code) and j>=len(analize)-1:
@@ -52,8 +102,6 @@ def solveFirst(code,filename):
             # result.append(code[i])
             i+=1
             continue
-        # if lazy == linecnt:
-        #     code[i]='}\n'+code[i]
         #需要空行，默认为下2行
         if 'NeedBraces' in analize[j]:
             flag = True
@@ -77,7 +125,7 @@ def solveFirst(code,filename):
                     cnt_l -= 1
                 if flag and cnt_l == 0:
                     strlist = list(code[i])
-                    strlist.insert(k+1,'{')
+                    strlist.insert(k+1,'{\n')
                     code[i] = "".join(strlist)
                     break
                 if "else" in code[i]:
@@ -86,42 +134,34 @@ def solveFirst(code,filename):
                     if lazy == linecnt:
                         strlist.insert(k + 4, '{\n')
                     else:
-                        strlist.insert(k + 4, '{')
+                        strlist.insert(k + 4, '{\n')
                     code[i] = "".join(strlist)
                     break
 
-        if 'OneStatementPerLine' in analize[j] and line_tag != linecnt:
-            line_tag = linecnt
-            lineadd = 1
-            flag = True
-            while flag:
-                flag =  False
-                strlist = list(code[i])
-                for k in range(0,len(code[i])):
-                    if code[i][k]==';'and k-1>=0 and code[i][k-1]!='\\' and k+1<len(code[i]) and code[i][k+1]!='\n':
-                        strlist.insert(k+1,'\n')
-                        code[i]="".join(strlist)
-                        flag = True
-                        break
         # print("修改后CODE=", code[i])
         j+=1
 
     #消除一下多余空格再重新写入
-    filetools.writetxt(filename, "result", code)
-    code = filetools.readCode(filename,"result")
+    filetools.writetxt("2_"+filename, "result", code)
+    code = filetools.readCode("2_"+filename,"result")
+    result = []
     for i in range(0,len(code)):
         code[i]=code[i].lstrip()
-    filetools.writetxt(filename, "result", code)
-    code = filetools.readCode(filename, "result")
-    analize = filetools.checkstyle(filename, "result")
+        if code[i]=='\n' or code[i]=='':
+            continue
+        else:
+            result.append(code[i])
+    code =result
+    filetools.writetxt("2_"+filename, "result", code)
+    code = filetools.readCode("2_"+filename, "result")
+    analize = filetools.checkstyle("2_"+filename, "result")
 
-    for lines in code:
-        print("ll",lines)
     i = 0
     j = 1
     len_tag = -1
     exadd = 0
     record_w = -1
+
     while True:
         if i>=len(code) and j>=len(analize)-1:
             break
@@ -132,6 +172,7 @@ def solveFirst(code,filename):
         print("检查规则"+analize[j])
         linecnt=int(analize[j].split(':')[2])
         print("行号=",linecnt,"CODE=",code[i])
+
         if i<linecnt-1:
             # result.append(code[i])
             i+=1
@@ -173,17 +214,23 @@ def solveFirst(code,filename):
             exadd += 1
             record_w = wordcnt
             code[i] = "".join(strlist)
-
-        print("修改后CODE=",code[i])
         j+=1
 
     filetools.writetxt(filename,"result",code)
+    code = filetools.readCode(filename,"result")
+    for i in range(0,len(code)):
+        if i>0 and code[i][0]=='/':
+            code[i] = getBlock(1 * (len(code[i - 1]) - len(code[i - 1].lstrip()))) + code[i]
+        elif code[i][0] == 'b' and code[i][1]=='r' and code[i][2] == 'e' and code[i][3]=='a' and code[i][4]=='k':
+            code[i] = getBlock(1 * (len(code[i - 1]) - len(code[i - 1].lstrip()))) + code[i]
+
+    filetools.writetxt(filename, "result", code)
     return filetools.readCode(filename,"result")
 
 #解决需求2的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 #TODO 实现本函数
 def solveSecond(code,filename):
-    analize = filetools.checkstyle(filename,"result")
+    # analize = filetools.checkstyle(filename,"result")
     file1 = open(os.path.join("words.txt"), 'r', encoding='UTF-8')
     # words = ['banana', 'apple', 'number']
     words = []
@@ -287,6 +334,7 @@ def solveSecond(code,filename):
         print(code, end='')
 
     return filetools.writetxt(filename,"result",result)
+
 
 #解决需求3的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 #TODO 实现本函数
