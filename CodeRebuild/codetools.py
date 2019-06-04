@@ -6,8 +6,14 @@ def solve(filename):
     code = filetools.readCode(filename,"tmp")
 
     code = solveFirst(code,filename)
-    print(code)
+    for codes in  code:
+        print (codes)
+    print("现在进入Step2")
     code = solveSecond(code, filename)
+
+    for codes in  code:
+        print (codes)
+
     print("现在进入Step3")
     code = solveThird(code, filename)
     # solveFirst(code,filename)
@@ -51,7 +57,7 @@ def fixLeftAndEmpty(code):
 
             j+=1
     return code
-#TODO 对此代码进行测试
+
 def solveFirst(code,filename):
 
     code = fixLeftAndEmpty(code)
@@ -173,9 +179,9 @@ def solveFirst(code,filename):
             i+=1
             continue
 
-        print("检查规则"+analize[j])
+        # print("检查规则"+analize[j])
         linecnt=int(analize[j].split(':')[2])
-        print("行号=",linecnt,"CODE=",code[i])
+        # print("行号=",linecnt,"CODE=",code[i])
 
         if i<linecnt-1:
             # result.append(code[i])
@@ -230,7 +236,7 @@ def solveFirst(code,filename):
 
     filetools.writetxt(filename, "result", code)
     return filetools.readCode(filename,"result")
-
+# TODO 修复BUG
 #解决需求2的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 def solveSecond(code,filename):
     print("22222222222")
@@ -331,9 +337,10 @@ def solveSecond(code,filename):
             cur = cur + 1
             tmpresult += codes[cur]
         result.append(tmpresult)
-    for code in result:
-        print(code)
-    return filetools.writetxt(filename, "result", result)
+    # for code in result:
+    #     print(code)
+    filetools.writetxt(filename, "result", result)
+    return result
 
 #我要找到后括号在啥子鬼地方
 def findhkh(code, st, i):
