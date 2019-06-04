@@ -243,7 +243,6 @@ def solveSecond(code,filename):
     print(code)
     # analize = filetools.checkstyle(filename,"result")
     file1 = open(os.path.join("words.txt"), 'r', encoding='UTF-8')
-    # words = ['banana', 'apple', 'number']
     words = []
     line = file1.readline()
     while line:
@@ -255,20 +254,21 @@ def solveSecond(code,filename):
     membername = []
     classname = []
     constname = []
-    sign = [' ', ',', ';', ':', '{', '}', '\n']
+    sign = [' ', ',', ';', ':', '.','{', '}', '\n']
     # 注释问题
     keyword = ['abstract', 'assert', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'const', 'continue',
                'default', 'do', 'double', 'else', 'enum', 'extends', 'finally', 'float', 'for', 'goto', 'if',
                'implements', 'import', 'instanceof', 'int', 'interface', 'long', 'native', 'new', 'package', 'private',
                'protected', 'public', 'return', 'short', 'static', 'strictfp', 'super', 'switch', 'synchronized',
-               'this', 'throw', 'throws', 'transient', 'try', 'void', 'volatile', 'while']
-    base = ['byte', 'short', 'int', 'long', 'float', 'double', 'boolean', 'char']
+               'this', 'throw', 'throws', 'transient', 'try', 'void', 'volatile', 'while', 'println']
+    base = ['byte', 'short', 'int', 'long', 'float', 'double', 'boolean', 'char', 'String']
     for codes in code:
         classflag = False
         constflag = False
         memberflag = False
-        tmp = re.split('[} ;,:{\n]', codes)
+        tmp = re.split('[ };,:{.\n]', codes)
         for i in tmp:
+            #print("cas "+ i)
             if i == 'class':
                 classflag = True
                 constflag = False
@@ -284,7 +284,9 @@ def solveSecond(code,filename):
                 classflag = False
                 constflag = False
             else:
-                if classflag:
+                if len(i) == 0:
+                    pass
+                elif classflag:
                     classname.append(i)
                 elif constflag:
                     constname.append(i)
@@ -298,47 +300,64 @@ def solveSecond(code,filename):
     print(constname)
     print("bianliang:")
     print(membername)
-
     for codes in code:
-        tmp = re.split('[ ;,{}\n]', codes)
+        stringflag = False
+        stringone = False
         tmpresult = ''
-        # print('tmp')
-        # print(tmp)
-        cur = 0
-        for i in tmp:
-            while cur < len(codes) and codes[cur] in sign:
-                tmpresult += codes[cur]
-                cur = cur + 1
-            cur = cur + len(i)
-            if i in keyword:
-                tmpresult += i
-            elif i in constname:
-                tmp1 = i.upper()
+        i = 0
+        while i < len(codes):
+            if codes[i] == '"':
+                stringflag = ~stringflag
+                tmpresult += codes[i]
+                i = i + 1
+                continue
+            if codes[i] == "'":
+                stringone = ~stringone
+                tmpresult += codes[i]
+                i = i + 1
+                continue
+            if stringone or stringflag:
+                tmpresult += codes[i]
+                i = i + 1
+                continue
+            if (codes[i] == '"' and stringflag == False) or (codes[i] == "'" and stringone == False):
+                tmpresult += codes[i]
+                i = i + 1
+                continue
+            if codes[i] in sign:
+                tmpresult += codes[i]
+                i = i + 1
+                continue
+            tmp = (re.split('[ .;,{}\n]', codes[i:]))[0]
+            i = i + len(tmp)
+            if tmp in keyword or tmp in base:
+                tmpresult += tmp
+            elif tmp in constname:
+                tmp1 = tmp.upper()
                 tmpresult += tmp1
-            elif i in classname:
-                tmp1 = i[:1].upper() + i[1:].lower()
+            elif tmp in classname:
+                tmp1 = tmp[:1].upper() + tmp[1:].lower()
                 for j in words:
                     index = tmp1.find(j)
                     if index != -1:
                         pass
                         tmp1 = tmp1.replace(j, j.title())
+                        break
                 tmpresult += tmp1
-            elif i in membername:
-                tmp1 = i.lower()
+            elif tmp in membername:
+                tmp1 = tmp.lower()
                 for j in words:
                     index = tmp1.find(j)
                     if index == -1:
                         continue
                     tmp1 = tmp1.replace(j, j.title())
+                    break
                 tmpresult += tmp1
             else:
-                tmpresult += i
-        while cur < len(codes):
-            cur = cur + 1
-            tmpresult += codes[cur]
+                tmpresult += tmp
         result.append(tmpresult)
     # for code in result:
-    #     print(code)
+        # print(code, end='')
     filetools.writetxt(filename, "result", result)
     return result
 
