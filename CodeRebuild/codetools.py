@@ -7,7 +7,8 @@ def solve(filename):
 
     code = solveFirst(code,filename)
     print(code)
-    #code = solveSecond(code, filename)
+    code = solveSecond(code, filename)
+    print("现在进入Step3")
     code = solveThird(code, filename)
     # solveFirst(code,filename)
     return HttpResponse("Success")
@@ -97,49 +98,50 @@ def solveFirst(code,filename):
             continue
         #获取行号 我们现在在分析第i+1行
         linecnt = int(analize[j].split(':')[2])
-        # print("检查规则" + analize[j])
+        print("检查规则" + analize[j])
         linecnt = int(analize[j].split(':')[2])
-        # print("行号=", linecnt, "CODE=",code[i])
+        print("行号=", linecnt, "CODE=",code[i])
         if i<linecnt-1:
             # result.append(code[i])
             i+=1
             continue
         #需要空行，默认为下2行
         if 'NeedBraces' in analize[j]:
-            flag = True
-            lazy=linecnt
-            for k in range(0,len(code[i])):
-                if code[i][k]==';' and k!=0 and code[i][k-1]!='\\':
-                    flag = False
+            matches = analize[j].split('\'')
+            print('matches=',matches)
+            if matches[1] == 'else':
+                cnt = code[i].index('else')
+                strlist = list(code[i])
+                strlist.insert(cnt+4,'{\n')
+                code[i]="".join(strlist)
+            else:
+                cnt_l = 0
+                flag = False
+                for k in range(0, len(code[i])):
+                    # print(k,code[i][k],cnt_l,flag)
+                    if code[i][k] == '(':
+                        flag = True
+                        cnt_l += 1
+                    elif code[i][k] == ')':
+                        cnt_l -= 1
+                    if flag and cnt_l == 0:
+                        strlist = list(code[i])
+                        strlist.insert(k+1,'{\n')
+                        code[i] = "".join(strlist)
+                        break
+            for u in range(i,len(code)):
+                flag = False
+                pos = -1
+                for v in range(0,len(code[u])):
+                    if(code[u][v]==';' and v>0 and code[u][v-1]!='\\'):
+                        flag = True
+                        pos = v
+                        break
+                if flag:
+                    strlist = list(code[u])
+                    strlist.insert(pos+1,'\n}\n')
+                    code[u]="".join(strlist)
                     break
-            if flag:
-                lazy=linecnt+1
-            # print("LAZY=",lazy,"CODE=",code[lazy-1])
-            code[lazy-1]=code[lazy-1]+'}\n'
-            cnt_l = 0
-            flag = False
-            for k in range(0, len(code[i])):
-                # print(k,code[i][k],cnt_l,flag)
-                if code[i][k] == '(':
-                    flag = True
-                    cnt_l += 1
-                elif code[i][k] == ')':
-                    cnt_l -= 1
-                if flag and cnt_l == 0:
-                    strlist = list(code[i])
-                    strlist.insert(k+1,'{\n')
-                    code[i] = "".join(strlist)
-                    break
-                if "else" in code[i]:
-                    cnt = code[i].index('else')
-                    strlist = list(code[i])
-                    if lazy == linecnt:
-                        strlist.insert(k + 4, '{\n')
-                    else:
-                        strlist.insert(k + 4, '{\n')
-                    code[i] = "".join(strlist)
-                    break
-
         # print("修改后CODE=", code[i])
         j+=1
 
@@ -230,7 +232,6 @@ def solveFirst(code,filename):
     return filetools.readCode(filename,"result")
 
 #解决需求2的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
-#TODO 实现本函数
 def solveSecond(code,filename):
     print("22222222222")
     print(code)
@@ -331,7 +332,7 @@ def solveSecond(code,filename):
             tmpresult += codes[cur]
         result.append(tmpresult)
     for code in result:
-        print(code, end='')
+        print(code)
     return filetools.writetxt(filename, "result", result)
 
 #我要找到后括号在啥子鬼地方
