@@ -16,9 +16,11 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 import CodeRebuild.views as view
+import UserService.views as userview
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('helloworld',view.helloWorld),
     path('testpost',view.testPost),
-    path('API/coderebuild',view.receiveTask)
+    path('API/coderebuild',view.receiveTask),
+    path('testmq',userview.show)
 ]
