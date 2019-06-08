@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d2903736-e227-493a-b90b-65e08c540a39" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CRBS/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CRBS/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CRBS/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/CRBS/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CRBS/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/CRBS/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/tasks.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/UserService/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,18 +20,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CRBS/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="46" column="16" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
-              <folding>
-                <element signature="e#305#314#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://D:/venv/CRBS4/Lib/site-packages/django/db/backends/mysql/base.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="154">
@@ -41,28 +28,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserService/tasks.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CRBS/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+            <state relative-caret-position="463">
+              <caret line="25" column="39" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
               <folding>
-                <element signature="e#0#38#0" expanded="true" />
+                <element signature="e#663#691#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserService/tests.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserService/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -73,15 +46,60 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserService/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserService/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="520">
+              <caret line="45" column="107" selection-start-line="45" selection-start-column="107" selection-end-line="45" selection-end-column="107" />
+              <folding>
+                <element signature="e#27#75#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/venv/CRBS4/Lib/site-packages/django/db/models/sql/query.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="137">
+              <caret line="1419" selection-start-line="1419" selection-end-line="1419" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CodeRebuild/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="181">
+              <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserService/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
+            <state relative-caret-position="209">
               <caret line="11" column="45" lean-forward="true" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://D:/venv/CRBS4/Lib/site-packages/django/db/backends/mysql/operations.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="103">
@@ -95,18 +113,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
               <caret line="125" selection-start-line="125" selection-end-line="125" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CRBS/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="28" lean-forward="true" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -163,21 +169,22 @@
         <option value="$PROJECT_DIR$/frontend/src/main.js" />
         <option value="$PROJECT_DIR$/frontend/src/App.vue" />
         <option value="$PROJECT_DIR$/frontend/src/components/newTask.vue" />
-        <option value="$PROJECT_DIR$/CRBS/urls.py" />
         <option value="$PROJECT_DIR$/CRBS/celery.py" />
         <option value="D:/venv/CRBS3/Lib/site-packages/celery/utils/timer2.py" />
-        <option value="$PROJECT_DIR$/UserService/tasks.py" />
-        <option value="$PROJECT_DIR$/UserService/views.py" />
         <option value="$PROJECT_DIR$/CRBS/__init__.py" />
         <option value="$PROJECT_DIR$/CRBS/settings.py" />
         <option value="D:/venv/CRBS4/Lib/site-packages/django/db/backends/mysql/base.py" />
         <option value="$PROJECT_DIR$/UserService/models.py" />
         <option value="D:/venv/CRBS4/Lib/site-packages/django/db/backends/mysql/operations.py" />
+        <option value="$PROJECT_DIR$/UserService/admin.py" />
+        <option value="$PROJECT_DIR$/UserService/tasks.py" />
+        <option value="$PROJECT_DIR$/UserService/views.py" />
+        <option value="$PROJECT_DIR$/CRBS/urls.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="25" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="70" />
     <option name="y" value="65" />
     <option name="width" value="1750" />
     <option name="height" value="980" />
@@ -348,7 +355,7 @@
       <workItem from="1559897622759" duration="5846000" />
       <workItem from="1559904668402" duration="2251000" />
       <workItem from="1559907880902" duration="3209000" />
-      <workItem from="1559918616289" duration="10292000" />
+      <workItem from="1559918616289" duration="14753000" />
     </task>
     <task id="LOCAL-00001" summary="完成了代码格式部分的编写，下面需要对其进行单元测试&#10;赵珉怿 19.6.1">
       <created>1559402469541</created>
@@ -387,7 +394,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101174000" />
+    <option name="totallyTimeSpent" value="105635000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -402,12 +409,12 @@
     <frame x="55" y="-7" width="1488" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24405594" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24405594" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.57908845" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3297587" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.1300268" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -419,7 +426,7 @@
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.07104558" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="TypeScript" order="13" />
-      <window_info active="true" anchor="bottom" id="manage.py@CRBS" order="14" visible="true" weight="0.5469169" />
+      <window_info anchor="bottom" id="manage.py@CRBS" order="14" weight="0.19168901" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -507,7 +514,6 @@
     <SUITE FILE_PATH="coverage/CRBS$Test__.coverage" NAME="Test:  Coverage Results" MODIFIED="1559897713880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/result/rwxMyLd1s9Q.java" />
     <entry file="file://$PROJECT_DIR$/result/kC77F9hssL8.java" />
     <entry file="file://$PROJECT_DIR$/result/1_kC77F9hssL8.java" />
     <entry file="file://$PROJECT_DIR$/result/1_EP8EbCE1V6v.java" />
@@ -655,16 +661,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CodeRebuild/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CodeRebuild/filetools.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="893">
@@ -681,16 +677,6 @@
           <caret line="480" column="36" selection-start-line="480" selection-start-column="36" selection-end-line="480" selection-end-column="36" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CRBS/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
-          <folding>
-            <element signature="e#663#691#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -725,31 +711,8 @@
     <entry file="file://$PROJECT_DIR$/UserService/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserService/admin.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserService/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserService/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UserService/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserService/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CRBS/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -785,17 +748,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserService/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="11" column="45" lean-forward="true" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/venv/CRBS4/Lib/site-packages/django/db/backends/mysql/operations.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="103">
           <caret line="145" column="28" selection-start-line="145" selection-start-column="28" selection-end-line="145" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserService/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserService/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserService/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="4" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CodeRebuild/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/venv/CRBS4/Lib/site-packages/django/db/models/sql/query.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="1419" selection-start-line="1419" selection-end-line="1419" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserService/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="45" lean-forward="true" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserService/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="45" column="107" selection-start-line="45" selection-start-column="107" selection-end-line="45" selection-end-column="107" />
+          <folding>
+            <element signature="e#27#75#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CRBS/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="25" column="39" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
+          <folding>
+            <element signature="e#663#691#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
