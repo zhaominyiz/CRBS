@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'CodeRebuild.apps.CoderebuildConfig',
     'djcelery',
+    'UserService'
 ]
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
@@ -85,8 +86,13 @@ WSGI_APPLICATION = 'CRBS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'coderebuild',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': '47.100.16.60',
+        'PORT':'3306',
+        'TIME_ZONE': 'Asia/Shanghai',
     }
 }
 
