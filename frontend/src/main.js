@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import VueResource from 'vue-resource';
-
+import axios from 'axios'
 import router from './router';       // 路由列表
 import store from './store';
 import iView from 'iview';
@@ -22,7 +22,8 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   Vue.http.options.root = 'http://localhost:8666'
 }
-
+// Vue.prototype.$http=axios
+Vue.prototype.$ajax= axios
 Vue.http.options.emulateJSON = true;
 Vue.http.interceptors.push(function(request, next) {
   // modify request

@@ -22,6 +22,6 @@ urlpatterns = [
     path('helloworld',view.helloWorld),
     path('testpost',view.testPost),
     path('API/coderebuild',view.receiveTask),
-    path('API/login',userview.login),
-    path('API/signup',userview.signup),
+    path('api/login',userview.login),
+    path('api/signup',userview.signup),
 ]

@@ -3,13 +3,17 @@
 from django.shortcuts import render,HttpResponse
 from UserService import models
 import json
+from django.http import JsonResponse
 
 def login(request):
-    msg=''
+    a={}
+    msg=""
     try:
         try:
+            print(request.POST)
             userName=request.POST.get('userName')
             password=request.POST.get('password')
+            print(userName,password)
         except:
             msg='INPUT_DATAERROR'
         else:
@@ -23,7 +27,11 @@ def login(request):
                 msg='SUCCESS'
     except:
         msg='SERVE_ERROR'
-    return HttpResponse(json.dumps(msg, ensure_ascii=False), content_type="application/json,charset=utf-8")
+    return JsonResponse({
+        'username':userName,
+        'msg': msg
+    })
+    # return HttpResponse(json.dumps(a, ensure_ascii=False), content_type="application/json,charset=utf-8")
 
 def signup(request):
     msg=''

@@ -3,10 +3,12 @@
     <div class="layout" :class="{'layout-hide-text': spanLeft < 5}">
       <div class="layout-ceiling">
             <div class="layout-ceiling-main">
-                <a href="#" v-if="this.$store.getters.username" @click="logout">退出</a>
+                <a href="#" v-if="usr!=null" @click="logout">退出</a>
                 <a href="#" v-else @click="showSignup">注册</a> |
-                <a href="#" v-if="this.$store.getters.username">{{ this.$store.getters.username }}</a>
-                <a href="#" @click="showLogin" v-else>登录</a>
+                <a href="#" v-if="usr!=null">{{ usr }}</a>
+                <a href="#" v-else @click="showLogin" v-else>登录</a>
+<!--                <a href="#" @click="showSignup">注册</a> |-->
+<!--                <a href="#" @click="showLogin" >登录</a>-->
             </div>
         </div>
         <Row type="flex">
@@ -65,7 +67,7 @@
         title="用户注册"
         :width="400"
         ok-text="注册"
-        @on-ok="login"
+        @on-ok="signup"
       >
       <Form :model="signupForm">
         <Form-item prop="user">
@@ -88,12 +90,14 @@
 </template>
 
 <script>
+
 export default {
   name: 'app',
   data () {
       return {
           spanLeft: 5,
           spanRight: 19,
+          usr:sessionStorage.getItem('username'),
           loginModal: false,
           loginForm: {
               user: '',
@@ -120,12 +124,13 @@ export default {
         this.loginModal = true
     },
     login () {
-        this.$store.dispatch('login', {username: this.loginForm.user,
+        this.$store.dispatch('login', {userName: this.loginForm.user,
              password: this.loginForm.password, vm: this})
     },
     logout () {
-        this.$store.dispatch('logout')
+        sessionStorage.removeItem('username')
         this.$Message.success("您已登出")
+        var t = setTimeout(function(){window.location.reload();},1000);
     },
     navigate (path) {
         this.$router.push('/' + path + '/')
@@ -134,7 +139,7 @@ export default {
       this.signupModal = true
     },
     signup(){
-      alert("TODO")
+      console.log(sessionStorage.getItem('username')+",,,"+usr)
     }
 
   },
