@@ -27,10 +27,18 @@ def login(request):
                 msg='SUCCESS'
     except:
         msg='SERVE_ERROR'
-    return JsonResponse({
+    # return JsonResponse({
+    #     'username':userName,
+    #     'msg': msg
+    # })
+    response =JsonResponse({
         'username':userName,
         'msg': msg
     })
+    # 添加响应头
+    org=request.headers['Origin']
+    response["Access-Control-Allow-Origin"]=org
+    return response
     # return HttpResponse(json.dumps(a, ensure_ascii=False), content_type="application/json,charset=utf-8")
 
 def signup(request):

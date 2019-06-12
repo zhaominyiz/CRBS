@@ -6,7 +6,7 @@
                 <a href="#" v-if="usr!=null" @click="logout">退出</a>
                 <a href="#" v-else @click="showSignup">注册</a> |
                 <a href="#" v-if="usr!=null">{{ usr }}</a>
-                <a href="#" v-else @click="showLogin" v-else>登录</a>
+                <a href="#" v-else @click="showLogin">登录</a>
 <!--                <a href="#" @click="showSignup">注册</a> |-->
 <!--                <a href="#" @click="showLogin" >登录</a>-->
             </div>

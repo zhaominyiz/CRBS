@@ -16,12 +16,18 @@ export const login = ({ commit, state, }, payload) => {
               sessionStorage.setItem('username', response.data.username)
               vm.$Message.success('登录成功!');
               var t = setTimeout(function(){window.location.reload();},2000);
+            }else if(msg==='SERVE_ERROR'){
+              vm.$Message.error('服务器错误!');
+            }else if(msg==='INPUT_DATAERROR'){
+              vm.$Message.error('输入数据错误!');
+            }else if(msg==='ACCOUNT_ERROR'){
+              vm.$Message.error('无此账号!');
             }else{
-              vm.$Message.error('认证失败!');
+              vm.$Message.error('密码错误!');
             }
         },
         (response) => {
-          vm.$Message.error('认证失败!');
+          vm.$Message.error('网络错误!');
         }
     )
 
