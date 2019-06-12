@@ -16,8 +16,8 @@ import djcelery
 djcelery.setup_loader()
 #数据库调度
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-BROKER_URL= 'amqp://myuser:mypassword@localhost:5672/vhost'
-
+BROKER_URL = 'amqp://myuser:mypassword@localhost:5672/vhost'
+CELERY_RESULT_BACKEND = 'amqp://myuser:mypassword@localhost:5672/vhost'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,9 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'CodeRebuild.apps.CoderebuildConfig',
+    'CodeRebuild',
     'djcelery',
-    'UserService'
+    'UserService',
 ]
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 

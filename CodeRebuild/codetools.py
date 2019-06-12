@@ -17,7 +17,7 @@ def solve(filename):
     print("现在进入Step3")
     code = solveThird(code, filename)
     # solveFirst(code,filename)
-    return HttpResponse("Success")
+    return filename
 
 #生成空格的函数
 def getBlock(cnt):

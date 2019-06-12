@@ -10,12 +10,12 @@ def getRandomName(numlength=11):
     return num
 
 #完成文件的上传
+'''
 def upload_file(request):
     if request.method == "POST":    # 请求方法为POST时，进行处理 
         myFile =request.FILES.get("code", None)    # 获取上传的文件，如果没有文件，则默认为None
         if not myFile: 
             return (False,"")
-        j = 10
         randname=getRandomName()
         # print(myFile.name+","+randname)
         filetype=myFile.name.split(".")
@@ -26,6 +26,14 @@ def upload_file(request):
             destination.write(chunk) 
         destination.close() 
         return (True,randname)
+'''
+def upload_file(myFile , randname):
+    randname+='.'+myFile.name.split(".")[1]
+    destination = open(os.path.join("tmp", randname), 'wb+')
+    for chunk in myFile.chunks():  # 分块写入文件
+        destination.write(chunk)
+    destination.close()
+    return randname
 
 #输入文件名,文件夹，输出成list的代码
 def readCode(name,folder):
