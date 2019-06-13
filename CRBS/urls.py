@@ -24,4 +24,6 @@ urlpatterns = [
     path('api/coderebuild',view.receiveTask),
     path('api/login',userview.login),
     path('api/signup',userview.signup),
+    path('api/getqueue',view.getqueue),
+    path('api/getdetail',view.getdetail),
 ]
