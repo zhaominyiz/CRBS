@@ -64,6 +64,8 @@ def getqueue(request):
     try:
         try:
             userName = request.POST.get('userName')
+            page = int(request.POST.get('page'))
+            pagesize = int(request.POST.get('pageSize'))
         except:
             msg = 'INPUT_DATAERROR'
         else:
@@ -73,7 +75,9 @@ def getqueue(request):
             else:
                 msg = 'SUCCESS'
                 task_list = models.Task.objects.filter(user=user_list[0])
-                for onetask in task_list:
+                listlen = len(task_list)
+                pagecnt = (listlen+pagesize-1)//pagesize
+                for onetask in task_list[(page-1)*pagesize : min(page*pagesize, listlen)]:
                     list.append({
                         'id':onetask.taskid ,
                         'status':onetask.status,
@@ -86,6 +90,8 @@ def getqueue(request):
                     })
     except:
         msg = 'SERVE_ERROR'
+
+
     if (msg != 'SUCCESS'):
         response = JsonResponse({
             'msg': msg
@@ -93,6 +99,7 @@ def getqueue(request):
     else:
         response = JsonResponse({
             'msg': msg ,
+            'cnt': pagecnt ,
             'list': list
         })
     # 添加响应头
