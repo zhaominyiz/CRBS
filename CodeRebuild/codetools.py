@@ -2,7 +2,7 @@ import os
 import CodeRebuild.filetools as filetools
 import re
 from django.http import HttpResponse
-def solve(filename):
+def solve(filename,multiif_to_if,for_to_while,switch_to_if):
     code = filetools.readCode(filename,"tmp")
 
     code = solveFirst(code,filename)
@@ -15,7 +15,7 @@ def solve(filename):
         print (codes)
 
     print("现在进入Step3")
-    code = solveThird(code, filename)
+    code = solveThird(code, filename,multiif_to_if,for_to_while,switch_to_if)
     # solveFirst(code,filename)
     return filename
 
@@ -371,7 +371,7 @@ def findhkh(code, st, i):
 
 #解决需求3的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 #TODO 实现本函数
-def solveThird(code,filename):
+def solveThird(code,filename,multiif_to_if,for_to_while,switch_to_if):
     base = ['byte', 'short', 'int', 'long', 'float', 'double', 'boolean', 'char', 'integer']
     print("3333333333sth  !!!   code:")
     multiif_to_if = -1

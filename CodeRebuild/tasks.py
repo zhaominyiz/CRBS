@@ -15,7 +15,7 @@ def add(x,y):
     return
 
 @task
-def coderebuildtask(myFile, userName):
+def coderebuildtask(myFile, userName, multiif_to_if, for_to_while, switch_to_if,language,caption,description,algorithm):
     print("hehe")
     randname=""
     while True:
@@ -27,9 +27,9 @@ def coderebuildtask(myFile, userName):
     if filename=='':
         return
     user = models.User.objects.get(name=userName)
-    p1 = models.Task(user=user , taskid=randname, orgfile=filename, status='RUNNING', nowfile='')
+    p1 = models.Task(user=user , taskid=randname, orgfile=filename, status='RUNNING', nowfile='', filename=myFile.name, language=language, caption=caption, description=description,algorithm=algorithm)
     p1.save()
-    filename = codetools.solve(filename)
+    filename = codetools.solve(filename,multiif_to_if,for_to_while,switch_to_if)
     p1.nowfile = filename
     p1.status = "FINISHED"
     p1.save()

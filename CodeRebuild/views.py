@@ -19,7 +19,32 @@ def receiveTask(request):
     try:
         try:
             userName = request.POST.get('userName')
-            myFile =request.FILES.get("code", None)
+            myFile = request.FILES.get("code", None)
+            lop = request.POST.get('lop')
+            if lop == '1':
+                for_to_while = 1
+            elif lop == '2':
+                for_to_while = -1
+            else:
+                for_to_while = 0
+            select = request.POST.get('select')
+            if select == '1':
+                switch_to_if = 1
+            elif select == '2':
+                switch_to_if = -1
+            else:
+                switch_to_if = 0
+            multiif = request.POST.get('multiif')
+            if multiif == '1':
+                multiif_to_if = 1
+            elif multiif == '2':
+                multiif_to_if = -1
+            else:
+                multiif_to_if = 0
+            language = request.POST.get('language')
+            caption = request.POST.get('caption')
+            description = request.POST.get('description')
+            algorithm = request.POST.get('algorithm')
         except:
             msg = 'INPUT_DATAERROR'
         else:
@@ -27,7 +52,7 @@ def receiveTask(request):
             if len(user_list)==0:
                 msg='ACCOUNT_ERROR'
             else:
-                coderebuildtask.delay(myFile,userName)
+                coderebuildtask.delay(myFile,userName,multiif_to_if,for_to_while,switch_to_if,language,caption,description,algorithm)
                 msg='SUCCESS'
     except:
         msg='SERVE_ERROR'
@@ -49,7 +74,16 @@ def getqueue(request):
                 msg = 'SUCCESS'
                 task_list = models.Task.objects.filter(user=user_list[0])
                 for onetask in task_list:
-                    list.append({'id':onetask.taskid , 'status':onetask.status})
+                    list.append({
+                        'id':onetask.taskid ,
+                        'status':onetask.status,
+                        'filename':onetask.filename,
+                        'time' : onetask.time,
+                        'language' : onetask.language,
+                        'caption' : onetask.caption,
+                        'description' : onetask.description,
+                        'algorithm' : onetask.algorithm
+                    })
     except:
         msg = 'SERVE_ERROR'
     if (msg != 'SUCCESS'):
