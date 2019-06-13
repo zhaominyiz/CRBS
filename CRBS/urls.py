@@ -21,7 +21,7 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('helloworld',view.helloWorld),
     path('testpost',view.testPost),
-    path('API/coderebuild',view.receiveTask),
+    path('api/coderebuild',view.receiveTask),
     path('api/login',userview.login),
     path('api/signup',userview.signup),
 ]

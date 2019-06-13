@@ -139,7 +139,8 @@ export default {
       this.signupModal = true
     },
     signup(){
-      console.log(sessionStorage.getItem('username')+",,,"+usr)
+      this.$store.dispatch('signup', {userName: this.signupForm.user,
+             password: this.signupForm.password, vm: this})
     }
 
   },

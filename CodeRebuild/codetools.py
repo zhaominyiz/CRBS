@@ -82,9 +82,9 @@ def solveFirst(code,filename):
             code[u] = "".join(strlist)
 
 
-    filetools.writetxt("1_"+filename, "result", code)
-    code = filetools.readCode("1_"+filename, "result")
-    analize = filetools.checkstyle("1_"+filename,"result")
+    filetools.writetxt(filename, "result", code)
+    code = filetools.readCode(filename, "result")
+    analize = filetools.checkstyle(filename,"result")
 
     i = 0
     j = 1
@@ -152,8 +152,8 @@ def solveFirst(code,filename):
         j+=1
 
     #消除一下多余空格再重新写入
-    filetools.writetxt("2_"+filename, "result", code)
-    code = filetools.readCode("2_"+filename,"result")
+    filetools.writetxt(filename, "result", code)
+    code = filetools.readCode(filename,"result")
     result = []
     for i in range(0,len(code)):
         code[i]=code[i].lstrip()
@@ -162,9 +162,9 @@ def solveFirst(code,filename):
         else:
             result.append(code[i])
     code =result
-    filetools.writetxt("2_"+filename, "result", code)
-    code = filetools.readCode("2_"+filename, "result")
-    analize = filetools.checkstyle("2_"+filename, "result")
+    filetools.writetxt(filename, "result", code)
+    code = filetools.readCode(filename, "result")
+    analize = filetools.checkstyle(filename, "result")
 
     i = 0
     j = 1
@@ -239,8 +239,6 @@ def solveFirst(code,filename):
 # TODO 修复BUG
 #解决需求2的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
 def solveSecond(code,filename):
-    print("22222222222")
-    print(code)
     # analize = filetools.checkstyle(filename,"result")
     file1 = open(os.path.join("words.txt"), 'r', encoding='UTF-8')
     words = []

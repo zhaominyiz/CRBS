@@ -31,15 +31,15 @@ def login(request):
     #     'username':userName,
     #     'msg': msg
     # })
-    response =JsonResponse({
-        'username':userName,
-        'msg': msg
-    })
-    # 添加响应头
-    org=request.headers['Origin']
-    response["Access-Control-Allow-Origin"]=org
-    return response
-    # return HttpResponse(json.dumps(a, ensure_ascii=False), content_type="application/json,charset=utf-8")
+
+    # return HttpResponse(json.dumps(a, ensure_ascii=Falsresponse =JsonResponse({
+    #         'username':userName,
+    #         'msg': msg
+    #     })
+    #     # 添加响应头
+    #     org=request.headers['Origin']
+    #     response["Access-Control-Allow-Origin"]=org
+    #     return responsee), content_type="application/json,charset=utf-8")
 
 def signup(request):
     msg=''
@@ -47,7 +47,7 @@ def signup(request):
         try:
             userName = request.POST.get('userName')
             password = request.POST.get('password')
-            realName = request.POST.get('realName')
+            realName = 'N/A'
         except:
             msg = 'INPUT_DATAERROR'
         else:
@@ -59,4 +59,10 @@ def signup(request):
                 msg='SUCCESS'
     except:
         msg='SERVE_ERROR'
-    return HttpResponse(json.dumps(msg, ensure_ascii=False), content_type="application/json,charset=utf-8")
+    response = JsonResponse({
+        'msg': msg
+    })
+    # 添加响应头
+    org = request.headers['Origin']
+    response["Access-Control-Allow-Origin"] = org
+    return response
