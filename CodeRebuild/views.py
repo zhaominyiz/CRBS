@@ -85,7 +85,7 @@ def getqueue(request):
                 msg = 'ACCOUNT_ERROR'
             else:
                 msg = 'SUCCESS'
-                task_list = models.Task.objects.filter(user=user_list[0])
+                task_list = models.Task.objects.filter(user=user_list[0]).order_by('-time')
                 listlen = len(task_list)
                 pagecnt = (listlen+pagesize-1)//pagesize
                 for onetask in task_list[(page-1)*pagesize : min(page*pagesize, listlen)]:

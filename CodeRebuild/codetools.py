@@ -15,7 +15,9 @@ def solve(filename,multiif_to_if,for_to_while,switch_to_if):
         print (codes)
 
     print("现在进入Step3")
+    print(code)
     code = solveThird(code, filename,multiif_to_if,for_to_while,switch_to_if)
+    print(code)
     code = solveFirst(code,filename)
     return filename
 
@@ -65,8 +67,13 @@ def solveFirst(code,filename):
 
     #先去除一行的多条语句
     for u in range(0,len(code)):
+        cntj = 0
         for v in range(0,len(code[u])):
-            if code[u][v]==';' and v>0 and code[u][v-1]!='\\' and code[u][v+1]!='\n':
+            if code[u][v]=='(' and v>0 and code[u][v-1]!='\\':
+                cntj+=1
+            if code[u][v]==')' and v>0 and code[u][v-1]!='\\':
+                cntj-=1
+            if code[u][v]==';' and v>0 and code[u][v-1]!='\\' and code[u][v+1]!='\n' and cntj==0:
                 strlist = list(code[u])
                 strlist.insert(v + 1,'\n')
                 code[u] = "".join(strlist)
@@ -80,7 +87,9 @@ def solveFirst(code,filename):
                     break
             strlist.insert(tmp+1,'\n')
             code[u] = "".join(strlist)
-
+    print("!?!?")
+    for codes in code:
+        print(codes)
 
     filetools.writetxt(filename, "result", code)
     code = filetools.readCode(filename, "result")
@@ -104,9 +113,9 @@ def solveFirst(code,filename):
             continue
         #获取行号 我们现在在分析第i+1行
         linecnt = int(analize[j].split(':')[2])
-        print("检查规则" + analize[j])
+        # print("检查规则" + analize[j])
         linecnt = int(analize[j].split(':')[2])
-        print("行号=", linecnt, "CODE=",code[i])
+        # print("行号=", linecnt, "CODE=",code[i])
         if i<linecnt-1:
             # result.append(code[i])
             i+=1
@@ -138,8 +147,13 @@ def solveFirst(code,filename):
             for u in range(i,len(code)):
                 flag = False
                 pos = -1
+                cntl = 0
                 for v in range(0,len(code[u])):
-                    if(code[u][v]==';' and v>0 and code[u][v-1]!='\\'):
+                    if code[u][v]=='(' and v>0 and code[u][v-1]!='\\':
+                        cntl+=1
+                    if code[u][v]==')' and v>0 and code[u][v-1]!='\\':
+                        cntl-=1
+                    if(code[u][v]==';' and v>0 and code[u][v-1]!='\\' and cntl==0):
                         flag = True
                         pos = v
                         break
@@ -162,6 +176,9 @@ def solveFirst(code,filename):
         else:
             result.append(code[i])
     code =result
+    print("F Result=")
+    for codes in code:
+        print(codes)
     filetools.writetxt(filename, "result", code)
     code = filetools.readCode(filename, "result")
     analize = filetools.checkstyle(filename, "result")
@@ -252,7 +269,7 @@ def solveSecond(code,filename):
     membername = []
     classname = []
     constname = []
-    sign = [' ', ',', ';', ':', '.','{', '}', '\n']
+    sign = [' ', ',', ';', ':', '.', '{', '}', '\n']
     # 注释问题
     keyword = ['abstract', 'assert', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'const', 'continue',
                'default', 'do', 'double', 'else', 'enum', 'extends', 'finally', 'float', 'for', 'goto', 'if',
@@ -264,9 +281,9 @@ def solveSecond(code,filename):
         classflag = False
         constflag = False
         memberflag = False
-        tmp = re.split('[ };,:{.\n]', codes)
+        tmp = re.split('[ (};,:{.\n]', codes)
         for i in tmp:
-            #print("cas "+ i)
+            # print("cas "+ i)
             if i == 'class':
                 classflag = True
                 constflag = False
@@ -326,7 +343,7 @@ def solveSecond(code,filename):
                 tmpresult += codes[i]
                 i = i + 1
                 continue
-            tmp = (re.split('[ .;,{}\n]', codes[i:]))[0]
+            tmp = (re.split('[ };,:{.]', codes[i:]))[0]
             i = i + len(tmp)
             if tmp in keyword or tmp in base:
                 tmpresult += tmp
@@ -340,22 +357,27 @@ def solveSecond(code,filename):
                     if index != -1:
                         pass
                         tmp1 = tmp1.replace(j, j.title())
-                        break
+                if codes[i] == '(':
+                    tmp1 = tmp1[:1].upper() + tmp1[1:]
                 tmpresult += tmp1
             elif tmp in membername:
                 tmp1 = tmp.lower()
                 for j in words:
-                    index = tmp1.find(j)
+                    index = tmp1[1:].find(j)
                     if index == -1:
                         continue
                     tmp1 = tmp1.replace(j, j.title())
-                    break
+                if codes[i] == '(':
+                    tmp1 = tmp1[:1].upper() + tmp1[1:]
                 tmpresult += tmp1
             else:
+                if i < len(codes) and codes[i] == '(':
+                    tmp = tmp[:1].upper() + tmp[1:]
                 tmpresult += tmp
+        print(tmpresult)
         result.append(tmpresult)
-    # for code in result:
-        # print(code, end='')
+    for code in result:
+        print(code, end='')
     filetools.writetxt(filename, "result", result)
     return result
 
@@ -374,9 +396,6 @@ def findhkh(code, st, i):
 def solveThird(code,filename,multiif_to_if,for_to_while,switch_to_if):
     base = ['byte', 'short', 'int', 'long', 'float', 'double', 'boolean', 'char', 'integer']
     print("3333333333sth  !!!   code:")
-    multiif_to_if = -1
-    for_to_while = -1
-    switch_to_if = 1
     #0:不执行，1：正向过程，-1：逆向过程
     cur=0
     while cur < len(code):
@@ -411,13 +430,13 @@ def solveThird(code,filename,multiif_to_if,for_to_while,switch_to_if):
                 print(tjs)
                 j = findhkh(code,'for',cur)
                 if tjs[0] != '':
-                    code[cur] = tjs[0]+';\nwhile('+tjs[1]+')'
+                    code[cur] = tjs[0]+';\nwhile('+tjs[1]+')'+strtmp[2]
                 else:
-                    code[cur] = 'while('+tjs[1]+')'
+                    code[cur] = 'while('+tjs[1]+')'+strtmp[2]
                 if '{' not in strtmp[2]:
-                    code[cur]+=' {'
+                    code[cur]+='\n{'
                 if tjs[2] != '':
-                    code[j] = tjs[2]+';'+code[j]
+                    code[j] = tjs[2]+';\n'+code[j]
         elif for_to_while == -1:
             if re.match('while', code[cur].strip()):
                 content = ['','','']
@@ -463,7 +482,7 @@ def solveThird(code,filename,multiif_to_if,for_to_while,switch_to_if):
                     i+=1
                 tmpresult=''
                 for strs in tjs:
-                    tmpresult+='if('+strs+')'
+                    tmpresult+='if('+strs+')\n'
                 tmpresult+=strtmp[2]
                 code[cur]=tmpresult
         elif multiif_to_if==-1:
@@ -485,5 +504,5 @@ def solveThird(code,filename,multiif_to_if,for_to_while,switch_to_if):
         print(codes)
     filetools.writetxt(filename, "result", code)
     #analize = filetools.checkstyle(filename,"result")
-    return
+    return code
 

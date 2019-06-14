@@ -29,8 +29,12 @@ def coderebuildtask(myFile, userName, multiif_to_if, for_to_while, switch_to_if,
     user = models.User.objects.get(name=userName)
     p1 = models.Task(user=user , taskid=randname, orgfile=filename, status='RUNNING', nowfile='', filename=myFile.name, language=language, caption=caption, description=description,algorithm=algorithm)
     p1.save()
-    filename = codetools.solve(filename,multiif_to_if,for_to_while,switch_to_if)
-    p1.nowfile = filename
-    p1.status = "FINISHED"
-    p1.save()
+    try:
+        filename = codetools.solve(filename,multiif_to_if,for_to_while,switch_to_if)
+        p1.nowfile = filename
+        p1.status = "FINISHED"
+        p1.save()
+    except:
+        p1.status = "FAILED"
+        p1.save()
     return
