@@ -16,7 +16,7 @@ def solve(filename,multiif_to_if,for_to_while,switch_to_if):
 
     print("现在进入Step3")
     code = solveThird(code, filename,multiif_to_if,for_to_while,switch_to_if)
-    # solveFirst(code,filename)
+    code = solveFirst(code,filename)
     return filename
 
 #生成空格的函数
