@@ -28,6 +28,7 @@ def upload_file(request):
         return (True,randname)
 '''
 def upload_file(myFile , randname):
+
     randname+='.'+myFile.name.split(".")[1]
     destination = open(os.path.join("tmp", randname), 'wb+')
     for chunk in myFile.chunks():  # 分块写入文件

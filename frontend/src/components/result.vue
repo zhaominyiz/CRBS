@@ -1,163 +1,53 @@
 <template>
-    <div>
-        <Table :context="vm" :columns="columns" :data="pairs"
-        @on-row-click="clickRow">
-        </Table>
-        <div style="margin: 10px;overflow: visible">
-            <div style="float: right;">
-                <Page :total="cnt" :page-size="pageSize"
-                 show-sizer show-elevator :current="1" :page-size-opts="[10, 20]"
-                  @on-change="changePage" @on-page-size-change="changePageSize"></Page>
-            </div>
-        </div>
-        <Modal ref="modal" v-model="showPair" :scrollable="true"
-         :styles="{top: '20px', max: '20px'}" :width="1000"
-         >
-            <Row :gutter="32">
-                <Col span="12">
-                    <Card >
-                        <p slot="title">{{srcName}}</p>
-                        <code-fragment ref="cfSrc" :code="srcCode" :fragments="srcFragments"></code-fragment>
-                    </Card>
-                </Col>
-                <Col span="12">
-                    <Card >
-                        <p slot="title">{{dstName}}</p>
-                        <code-fragment ref="cfDst" :code="dstCode" :fragments="dstFragments"></code-fragment>
-                    </Card>
-                </Col>
-            </Row>
-        </Modal>
+    <div class="line-numbers">
+        <pre class="language-java line-numbers"><code class="language-java" v-html="code"></code></pre>
+<!--    <VueMarkdown :source="code"></VueMarkdown>-->
     </div>
-</template>
 
+</template>
 <script>
-    import Vue from 'vue';
+   // import Vue from 'vue';
+    import Prism from 'prismjs'
+   import VueMarkdown from 'vue-markdown'
+
     export default {
     data () {
         return {
-            showPair: false,
-            vm: this,
-            cnt: 0,
-            pageSize: 10,
-            currentPage: 1,
-            columns: [
-                {
-                    title: "源代码",
-                    key: 'src',
-                },
-                {
-                    title: "目的代码",
-                    key: 'dst',
-                },
-                {
-                    title: "相似度",
-                    key: 'similarity'
-                }
-            ],
-            pairs: [
-
-            ],
-            srcCode: "",
-            dstCode: "",
-            srcFragments: [[0, 0]],
-            dstFragments: [[0, 0]],
-            srcName: "",
-            dstName: "",
+            code:
+              '',
+            urls:
+              ''
         }
     },
+      mounted(){
+        var data = {
+                  userName:sessionStorage.getItem('username'),
+                  id:sessionStorage.getItem('taskid')
+        }
+        console.log(data)
+        this.$http.post('api/getdetail',data).then(
+          (Response) => {
+            //this.code = Prism.highlight(Response.body.nowText, Prism.languages.java, 'java');
+            this.urls=Response.body.nowFile;
+            //this.code = Response.body.nowText.trimRight();
+            let text = Response.body.nowText;
+
+            // this.code = '```java\n' + text;
+            // console.log(this.code)
+            this.code = text.trimRight()+'\n ';
+            this.$nextTick(() => {
+              Prism.highlightAll();
+            });
+          }
+        )
+      },
     computed: {
     },
     methods: {
-        changePage (page) {
-            var url = `api/tasks/${this.$route.query.taskid}/results`
-            this.currentPage = page
-            var data = {
-                page: this.currentPage,
-                pageSize: this.pageSize,
-            }
-            this.$http.get(url, {
-                params: data
-            }).then(
-                (Response) => {
-                    this.pairs = Response.body.results
-                }
-            )
-        },
-        changePageSize (pageSize) {
-            var url = `api/tasks/${this.$route.query.taskid}/results`
-            this.pageSize = pageSize
-            var data = {
-                page: this.currentPage,
-                pageSize: this.pageSize,
-            }
-            this.$http.get(url, {
-                params: data
-            }).then(
-                (Response) => {
-                    this.pairs = Response.body.results
-                }
-            )
-        },
-        clickRow (row) {
-            this.$http.get(`api/results/${row.id}`).then(
-                (Response) => {
-                    let pairs = Response.body.pairs
-                    let srcFragments = pairs.map( (x) => x[0])
-                    let dstFragments = pairs.map( (x) => x[1])
-                    let srcCode = Response.body.srcCode
-                    let dstCode = Response.body.dstCode
-                    this.srcCode = srcCode
-                    this.dstCode = dstCode
-                    this.srcName = row.src
-                    this.dstName = row.dst
-                    this.srcFragments = srcFragments
-                    this.dstFragments = dstFragments
-                    this.showPair = true
-                }
-            )
-        }
-    },
-    beforeRouteEnter (to, from , next) {
-        next(vm => {
-            var url = `api/tasks/${vm.$route.query.taskid}/results`
-            var data = {
-                page: vm.currentPage,
-                pageSize: vm.pageSize,
-            }
-            vm.$http.get(url, {
-                params: data
-            }).then(
-                (Response) => {
-                    vm.pairs = Response.body.results
-                }
-            )
-            var cntUrl = `api/tasks/${vm.$route.query.taskid}/results/count`
-            vm.$http.get(cntUrl).then(
-                (Response) => {
-                    vm.cnt = Response.body.count
-                }
-            )
-            // 下面这段代码在注册事件
-            let cfSrc = vm.$refs.cfSrc
-            let cfDst = vm.$refs.cfDst
-            cfSrc.$on('scroll', (id) => {
-                let preId = `${cfSrc.prefix}-${id}`
-                document.getElementById(preId).scrollIntoView()
-            })
-            cfDst.$on('scroll', (id) => {
-                let preId = `${cfDst.prefix}-${id}`
-                document.getElementById(preId).scrollIntoView()
-            })
-            // Vue.set 不可以把一个value作为vue instance, 这里是在偷懒
-            // 正确点的姿势应该是记录字符串. 在上层做映射
-            // 或者使用bus
-            cfSrc.other = cfDst
-            cfDst.other = cfSrc
-        })
     },
     components: {
-        'code-fragment': require('./codeFragment.vue')
+      VueMarkdown,
+      'code-fragment': require('./codeFragment.vue')
     }
 }
 </script>
@@ -166,4 +56,165 @@
         max-height: 500px;
         overflow: scroll;
     }
+
+    /**
+* GHColors theme by Avi Aryan (http://aviaryan.in)
+* Inspired by Github syntax coloring
+*/
+    pre[class*=language-].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+    white-space: pre-wrap;
+    }
+
+pre[class*=language-].line-numbers>code {
+    position: relative;
+    white-space: inherit
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em;
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.line-numbers-rows>span {
+    pointer-events: none;
+    display: block;
+    counter-increment: linenumber
+}
+
+.line-numbers-rows>span:before {
+    content: counter(linenumber);
+    color: #999;
+    display: block;
+    padding-right: .8em;
+    text-align: right
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #393A34;
+  font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  font-size: 0.95em;
+  line-height: 1.2em;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+  background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+  background: #b3d4fc;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  border: 1px solid #dddddd;
+  background-color: white;
+}
+
+/* :not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+} */
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .2em;
+  padding-top: 1px; padding-bottom: 1px;
+  background: #f8f8f8;
+  border: 1px solid #dddddd;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #999988; font-style: italic;
+}
+
+.token.namespace {
+  opacity: .7;
+}
+
+.token.string,
+.token.attr-value {
+  color: #e3116c;
+}
+.token.punctuation,
+.token.operator {
+  color: #393A34; /* no highlight */
+}
+
+.token.entity,
+.token.url,
+.token.symbol,
+.token.number,
+.token.boolean,
+.token.variable,
+.token.constant,
+.token.property,
+.token.regex,
+.token.inserted {
+  color: #36acaa;
+}
+
+.token.atrule,
+.token.keyword,
+.token.attr-name,
+.language-autohotkey .token.selector {
+  color: #00a4db;
+}
+
+.token.function,
+.token.deleted,
+.language-autohotkey .token.tag {
+  color: #9a050f;
+}
+
+.token.tag,
+.token.selector,
+.language-autohotkey .token.keyword {
+  color: #00009f;
+}
+
+.token.important,
+.token.function,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
 </style>

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/index'
 import newTask from "../components/newTask";
-import History from "../components/history";
+import listTask from "../components/listTask";
 import userInfo from "../components/userInfo";
 import detail from "../components/result";
 Vue.use(Router)
@@ -24,7 +24,7 @@ export default new Router({
     },{
       path:'/history',
       name:'history',
-      component:History
+      component:listTask
     },{
       path:'/detail',
       name:'detail',

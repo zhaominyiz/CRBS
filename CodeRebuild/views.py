@@ -19,7 +19,10 @@ def receiveTask(request):
     try:
         try:
             userName = request.POST.get('userName')
-            myFile = request.FILES.get("code", None)
+            # myFile =request.FILES.get("file", None)
+            # print(userName,myFile)
+            myFile = request.FILES.get("file", None)
+            print(userName,myFile)
             lop = request.POST.get('lop')
             if lop == '1':
                 for_to_while = 1
@@ -41,10 +44,11 @@ def receiveTask(request):
                 multiif_to_if = -1
             else:
                 multiif_to_if = 0
-            language = request.POST.get('language')
+            language = request.POST.get('lang')
             caption = request.POST.get('caption')
             description = request.POST.get('description')
             algorithm = request.POST.get('algorithm')
+            print("cap",caption)
         except:
             msg = 'INPUT_DATAERROR'
         else:
@@ -56,7 +60,13 @@ def receiveTask(request):
                 msg='SUCCESS'
     except:
         msg='SERVE_ERROR'
-    return HttpResponse(json.dumps(msg, ensure_ascii=False), content_type="application/json,charset=utf-8")
+        # 添加响应头
+    response=JsonResponse({
+        'msg':msg
+    })
+    # org = request.headers['Origin']
+    # response["Access-Control-Allow-Origin"] = org
+    return response
 
 def getqueue(request):
     msg = ''
@@ -64,6 +74,7 @@ def getqueue(request):
     try:
         try:
             userName = request.POST.get('userName')
+            print("???",userName)
             page = int(request.POST.get('page'))
             pagesize = int(request.POST.get('pageSize'))
         except:
@@ -103,8 +114,8 @@ def getqueue(request):
             'list': list
         })
     # 添加响应头
-    org = request.headers['Origin']
-    response["Access-Control-Allow-Origin"] = org
+    # org = request.headers['Origin']
+    # response["Access-Control-Allow-Origin"] = org
     return response
 
 def getdetail(request):

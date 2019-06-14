@@ -42,9 +42,14 @@
                             <Option v-for="lop in lops" :value="lop.value" :key="lop">{{ lop.label }}</Option>
                         </Select>
                     </Form-item>
-                  <Form-item label="条件语句">
+                  <Form-item label="switch语句">
                         <Select v-model="uploadForm.select" style="width:200px">
                             <Option v-for="select in selects" :value="select.value" :key="select">{{ select.label }}</Option>
+                        </Select>
+                    </Form-item>
+                  <Form-item label="if语句">
+                        <Select v-model="uploadForm.multiif" style="width:200px">
+                            <Option v-for="multiif in multiifs" :value="multiif.value" :key="multiif">{{ multiif.label }}</Option>
                         </Select>
                     </Form-item>
 <!--                    <Form-item label="长度阈值">-->
@@ -63,18 +68,31 @@
                     </Row>
                 </Form>
                 <Form v-if="step==2" :model="uploadForm" :label-width="80">
-                     <Upload
-                        multiple
-                        type="drag"
-                        action="http://192.168.1.30:8000/api/task/create"
-                        :headers="uploadHeaders"
-                        :data="uploadData"
-                        >
-                        <div style="padding: 20px 0">
-                            <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
-                            <p>点击或将文件拖拽到这里上传</p>
-                        </div>
-                    </Upload>
+<!--                     <Upload-->
+<!--                        multiple-->
+<!--                        type="drag"-->
+<!--                        action="http://localhost:8666/api/coderebuild"-->
+<!--                        :headers="uploadHeaders"-->
+<!--                        :data="uploadData"-->
+<!--                        >-->
+<!--                        <div style="padding: 20px 0">-->
+<!--                            <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>-->
+<!--                            <p>点击或将文件拖拽到这里上传</p>-->
+<!--                        </div>-->
+<!--                    </Upload>-->
+                  <Upload
+                    ref="upload"
+                    action="http://localhost:8666/api/coderebuild"
+                  :data="uploadData"
+                  :on-success="UploadSuccess"
+                    :before-upload = "handleBeforeUpload"
+                    :on-eroor="UploadFailed"
+                  >
+                <i-button type="info" class="btn btn-file" icon="ios-cloud-upload-outline"
+                          style="width:100%;">选择附件
+                </i-button>
+                </Upload>
+
                     <Row type="flex" :gutter="32" justify="center">
                         <Col>
                             <Button @click="prevStep" type="primary" shape="circle" icon="chevron-left"></Button>
@@ -98,11 +116,16 @@ export default {
             uploadForm: {
                 caption: "",
                 description: "",
-                lang: "cpp",
-                prep_list: ["comment", "spec-keyword", "spec-punctuation"],
-                algorithm: "sam",
+                lang: "",
+                // prep_list: ["comment", "spec-keyword", "spec-punctuation"],
+                algorithm: "",
                 lop:"",
-                select:""
+                select:"",
+                multiif:"",
+                userName: ""
+            },
+            uploadData:{
+
             },
             langs: [
                 {
@@ -118,6 +141,10 @@ export default {
             ],
             lops: [
                 {
+                  'value':'0',
+                  'label':'不予以操作'
+                },
+                {
                     'value': '1',
                     'label': '将for语句转成while语句'
                 },{
@@ -127,57 +154,74 @@ export default {
             ],
             selects: [
                 {
+                  'value':'0',
+                  'label':'不予以操作'
+                },
+                {
                     'value': '1',
                     'label': '将switch语句转if语句'
                 },{
                     'value': '2',
                     'label': '将if语句转成switch语句'
+                }
+            ],
+            multiifs:[
+              {
+                  'value':'0',
+                  'label':'不予以操作'
+                },
+                {
+                    'value': '1',
+                    'label': '将多条件if语句转多if语句'
                 },{
-                    'value': '3',
-                    'label': '将多else if语句转成if语句'
-                },{
-                    'value': '4',
-                    'label': '将if语句转成多else if语句'
+                    'value': '2',
+                    'label': '将多条if语句转多条件if语句'
                 }
             ]
         }
     },
-    computed: {
-        uploadData () {
-            var form = this.uploadForm
-            return {
-                algorithm: form.algorithm,
-                caption: form.caption,
-                description: form.description,
-                lang: form.lang,
-                lop: form.lop,
-                select: form.select,
-                prep: form.prep_list.join('!'),
-                params: JSON.stringify({
-                    len_t: form.tlen,
-                    sim_t: form.similarity / 100.0,
-                })
-            }
-        },
-        uploadHeaders () {
-            return {
-                Authorization: `Bearer ${this.$store.state.token}`
-            }
-        },
-    },
     methods: {
-        simFormat (val) {
-            return '相似度' + val + '%'
-        },
-        tlenFormat (val) {
-            return '相似token长度阈值' + val
-        },
         prevStep () {
             this.step -= 1;
         },
         nextStep () {
             this.step += 1
         },
+        UploadSuccess(){
+          this.$Message.success("成功提交队列，请于记录中检查结果")
+        },
+        UploadFailed(){
+          this.$Message.error("网络异常！")
+        },
+        handleBeforeUpload(ufile){
+            var form = this.uploadForm
+            this.uploadData={
+                  algorithm: form.algorithm,
+                  caption: form.caption,
+                  description: form.description,
+                  lang: form.lang,
+                  lop: form.lop,
+                  select: form.select,
+                  multiif: form.multiif,
+                  userName: sessionStorage.getItem('username'),
+                  file:ufile
+            }
+            console.log(this.uploadData)
+            let promise = new Promise((resolve) => {
+                      this.$nextTick(function () {
+                          resolve(true);
+                      });
+                  });
+            // alert("DO THIS"+ufile)
+             return promise; //通过返回一个promis对象解决
+        }
+    },
+    computed:{
+        addheaders(){
+          return{
+            "Access-Control-Allow-Origin:":"*"
+          }
+        }
     }
 }
 </script>

@@ -36,10 +36,14 @@ def login(request):
     #         'username':userName,
     #         'msg': msg
     #     })
-    #     # 添加响应头
-    #     org=request.headers['Origin']
-    #     response["Access-Control-Allow-Origin"]=org
-    #     return responsee), content_type="application/json,charset=utf-8")
+    response = JsonResponse({
+        'msg': msg,
+        'username':userName
+    })
+    # 添加响应头
+    org=request.headers['Origin']
+    response["Access-Control-Allow-Origin"]=org
+    return response
 
 def signup(request):
     msg=''

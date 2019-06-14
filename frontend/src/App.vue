@@ -20,7 +20,7 @@
                     </Menu-item>
                     <Menu-item name="history">
                         <Icon type="ios-keypad" :size="iconSize"></Icon>
-                        <span class="layout-text">重构历史</span>
+                        <span class="layout-text">重构记录</span>
                     </Menu-item>
                     <Menu-item name="userInfo">
                         <Icon type="ios-analytics" :size="iconSize"></Icon>
@@ -106,7 +106,7 @@ export default {
           signupModal: false,
           signupForm:{
               user: '',
-                password: '',
+              password: '',
           }
       }
   },

@@ -29,6 +29,9 @@
                 prefix: Math.random().toString(36).substr(2)
             }
         },
+        mounted(){
+          alert("keke")
+        },
         computed: {
             fs: function () {
                 return prePost(this.fragments)
@@ -64,7 +67,7 @@
                             id: `${this.prefix}-${id}`,
                         },
                         on: {
-                            // 注意, nativeOn不奏效. 
+                            // 注意, nativeOn不奏效.
                             click: () => {
                                 this.scroll(id)
                             }
@@ -78,7 +81,7 @@
             preList.push(h('pre', {
                 style: {
                 }
-            }, 
+            },
             [this.code.slice(last)]))
             return h('div', {
                 style: {

@@ -26,8 +26,12 @@ const listTask = {
             currentPage: 1,
             columns: [
                 {
+                  title:"文件名",
+                  key:'filename'
+                },
+                {
                     title: "语言",
-                    key: 'lang',
+                    key: 'language',
                 },
                 {
                     title: "简介",
@@ -64,15 +68,11 @@ const listTask = {
                 },
                 {
                     title: "创建时间",
-                    key: "created",
+                    key: "time",
                 },
                 {
                     title: "状态",
                     key: "status",
-                },
-                {
-                    title: "预处理器",
-                    key: "prep",
                 },
                 {
                     title: "操作",
@@ -99,6 +99,20 @@ const listTask = {
 
         return data;
     },
+    mounted(){
+      var data = {
+                userName:sessionStorage.getItem('username'),
+                page:1,
+                pageSize : 10,
+      }
+      console.log(data)
+      this.$http.post('api/getqueue',data).then(
+        (Response) => {
+          this.tasks = Response.body.list
+          this.currentPage = 1
+        }
+      )
+    },
     computed: {
         pages () {
             return Math.ceil(this.cnt / this.pageSize)
@@ -107,11 +121,12 @@ const listTask = {
     methods: {
         show (id) {
             console.log('show', id)
+            sessionStorage.setItem("taskid",id)
             this.$router.push({
-                path: 'detial',
-                query: {
-                    taskid: id
-                }
+                path: '../detail',
+                // query: {
+                //     taskid: id
+                // }
             })
         },
         changePage (page) {
@@ -125,12 +140,13 @@ const listTask = {
                 (Response) => {
                     this.tasks = Response.body.tasks
                     this.currentPage = page
+
                 }
             )
         },
         changePageSize (pageSize) {
             var data = {
-                page: this.currentPage,
+                page: 1,
                 pageSize: pageSize,
             }
             this.$http.get('api/tasks', {
@@ -143,26 +159,37 @@ const listTask = {
             )
         },
     },
-    beforeRouteEnter (to, from , next) {
-        next(vm => {
-            vm.$http.get('api/tasks/count').then(
-                (Response) => {
-                    vm.cnt = Response.body.count
-                    var data = {
-                        page: vm.currentPage,
-                        pageSize: vm.pageSize,
-                    }
-                    vm.$http.get('api/tasks', {
-                        params: data
-                    }).then(
-                        (Response) => {
-                            vm.tasks = Response.body.tasks
-                        }
-                    )
-                }
-            )
-        })
-    }
+    // mounted () {
+    //   alert("???")
+    //     // next(vm => {
+    //     //     // vm.$http.get('api/tasks/count').then(
+    //     //     //     (Response) => {
+    //     //     //         vm.cnt = Response.body.count
+    //     //     //         var data = {
+    //     //     //             page: vm.currentPage,
+    //     //     //             pageSize: vm.pageSize,
+    //     //     //         }
+    //     //     //         vm.$http.get('api/tasks', {
+    //     //     //             params: data
+    //     //     //         }).then(
+    //     //     //             (Response) => {
+    //     //     //                 vm.tasks = Response.body.tasks
+    //     //     //             }
+    //     //     //         )
+    //     //     //     }
+    //     //     // )
+    //     //             var data = {
+    //     //                 userName:sessionStorage.getItem('username')
+    //     //             }
+    //     //             this.$http.get('api/getqueue', {
+    //     //                 params: data
+    //     //             }).then(
+    //     //                 (Response) => {
+    //     //                     this.tasks = Response.body.list
+    //     //                 }
+    //     //             )
+    //     // })
+    // }
 }
 
 export default listTask
