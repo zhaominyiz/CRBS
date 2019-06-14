@@ -483,6 +483,7 @@ def solveThird(code,filename,multiif_to_if,for_to_while,switch_to_if):
         cur+=1
     for codes in code:
         print(codes)
+    filetools.writetxt(filename, "result", code)
     #analize = filetools.checkstyle(filename,"result")
     return
 
