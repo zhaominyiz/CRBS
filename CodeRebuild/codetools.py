@@ -2,6 +2,11 @@ import os
 import CodeRebuild.filetools as filetools
 import re
 from django.http import HttpResponse
+
+
+def hock(code):
+    return code
+
 def solve(filename,multiif_to_if,for_to_while,switch_to_if):
     code = filetools.readCode(filename,"tmp")
 
@@ -15,10 +20,11 @@ def solve(filename,multiif_to_if,for_to_while,switch_to_if):
         print (codes)
 
     print("现在进入Step3")
-    print(code)
     code = solveThird(code, filename,multiif_to_if,for_to_while,switch_to_if)
     print(code)
+    print("重构结束")
     code = solveFirst(code,filename)
+    code = hock(code)
     return filename
 
 #生成空格的函数

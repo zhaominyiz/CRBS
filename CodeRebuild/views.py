@@ -70,6 +70,7 @@ def receiveTask(request):
 
 def getqueue(request):
     msg = ''
+    cnt = 0
     list=[]
     try:
         try:
@@ -87,6 +88,7 @@ def getqueue(request):
                 msg = 'SUCCESS'
                 task_list = models.Task.objects.filter(user=user_list[0]).order_by('-time')
                 listlen = len(task_list)
+                cnt = len(task_list)
                 pagecnt = (listlen+pagesize-1)//pagesize
                 for onetask in task_list[(page-1)*pagesize : min(page*pagesize, listlen)]:
                     list.append({
@@ -110,12 +112,13 @@ def getqueue(request):
     else:
         response = JsonResponse({
             'msg': msg ,
-            'cnt': pagecnt ,
+            # 'cnt': pagecnt ,
+            'cnt':cnt,
             'list': list
         })
     # 添加响应头
-    # org = request.headers['Origin']
-    # response["Access-Control-Allow-Origin"] = org
+    # response["Access-Control-Allow-Origin"] = "*"
+    # print(cnt,'??')
     return response
 
 def getdetail(request):

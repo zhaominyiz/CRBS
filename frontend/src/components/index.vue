@@ -4,7 +4,7 @@
             CRBS
         </h1>
         <h2 style="margin-top: 50px">
-            代码重构系统 <Icon type="search"></Icon>
+            代码重构系统(暂未部署后端) <Icon type="search"></Icon>
         </h2>
     </div>
 </template>
