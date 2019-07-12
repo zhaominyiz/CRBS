@@ -33,7 +33,9 @@
             let text = Response.body.nowText;
 
             // this.code = '```java\n' + text;
-            // console.log(this.code)
+            // console.log("Receive\n"+text)
+            text=text.replace(/</g,"&lt;")
+            text=text.replace(/>/g,"&gt;")
             this.code = text.trimRight()+'\n ';
             this.$nextTick(() => {
               Prism.highlightAll();
