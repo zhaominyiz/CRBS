@@ -11,11 +11,11 @@ def hock(code):
 def solve(filename, multiif_to_if, for_to_while, switch_to_if):
     code = filetools.readCode(filename, "tmp")
 
-    code = solveFirst(code, filename,False)
+    code = solveFirst(code, filename, False)
     for codes in code:
         print(codes)
     print("跳过Step2")
-    # code = solveSecond(code, filename)
+    code = solveSecond(code, filename)
 
     for codes in code:
         print(codes)
@@ -24,7 +24,7 @@ def solve(filename, multiif_to_if, for_to_while, switch_to_if):
     code = solveThird(code, filename, multiif_to_if, for_to_while, switch_to_if)
     print(code)
     print("重构结束")
-    code = solveFirst(code, filename,True)
+    code = solveFirst(code, filename, True)
     code = hock(code)
     return filename
 
@@ -73,9 +73,23 @@ def fixLeftAndEmpty(code):
 # 第一步 代码格式重构
 # 采用CheckStyle
 # 赵珉怿
-def solveFirst(code, filename,noteflag):
+def solveFirst(code, filename, noteflag):
     # 先去除左边的空格号
     code = fixLeftAndEmpty(code)
+    # 再消除一下一行语句太多;
+    for i in range(0, len(code)):
+        cnt = 0
+        cnt_k = 0
+        for j in range(0, len(code[i]) - 1):
+            if code[i][j] == '"': cnt += 1
+            if code[i][j] == '(' and cnt % 2 == 0:
+                cnt_k += 1
+            if code[i][j] == ')' and cnt % 2 == 0:
+                cnt_k -= 1
+            if code[i][j] == ';' and cnt % 2 == 0 and code[i][j + 1] != '\n' and cnt_k == 0:
+                strlist = list(code[i])
+                strlist.insert(j + 1, '\n')
+                code[i] = "".join(strlist)
     # 写入到文件中
     filetools.writetxt(filename, "result", code)
 
@@ -86,10 +100,10 @@ def solveFirst(code, filename,noteflag):
         cntjj = 0
         flag = False
         for v in range(0, len(code[u])):
-            if code[u][v]=='"':
-                if v==0 or code[u][v-1]!='\\':
-                    cntjj+=1
-                    if cntjj%2==1:
+            if code[u][v] == '"':
+                if v == 0 or code[u][v - 1] != '\\':
+                    cntjj += 1
+                    if cntjj % 2 == 1:
                         flag = True
             if flag:
                 continue
@@ -102,12 +116,13 @@ def solveFirst(code, filename,noteflag):
                 strlist.insert(v + 1, '\n')
                 code[u] = "".join(strlist)
             # 处理一个单独的{
-            if (code[u][v] =='}')and v>0 and code[u][v-1]!='\\':
+            if (code[u][v] == '}') and v > 0 and code[u][v - 1] != '\\':
                 strlist = list(code[u])
                 strlist.insert(v, '\n')
                 code[u] = "".join(strlist)
             # 处理注释
-            if (code[u][v] =='/' and v!=len(code[u])-1 and code[u][v+1]=='*') and v>0 and code[u][v-1]!='\\':
+            if (code[u][v] == '/' and v != len(code[u]) - 1 and code[u][v + 1] == '*') and v > 0 and code[u][
+                v - 1] != '\\':
                 strlist = list(code[u])
                 strlist.insert(v + 2, '\n')
                 code[u] = "".join(strlist)
@@ -281,11 +296,11 @@ def solveFirst(code, filename,noteflag):
             code[i] = "".join(strlist)
         j += 1
 
-    #处理缩进
+    # 处理缩进
     # print("处理缩进~~")
     # i 指着code j指着分析
-    tapnum=[0]*(len(code)+2)
-    for j in range(1,len(analize)-1):
+    tapnum = [0] * (len(code) + 2)
+    for j in range(1, len(analize) - 1):
         # print("!???")
         # print(analize[j])
         linecnt = int(analize[j].split(':')[2])
@@ -296,36 +311,36 @@ def solveFirst(code, filename,noteflag):
             print(matches)
             tapct = int(matches[0])
             tapct *= 2
-            tapnum[linecnt-1]=tapct
+            tapnum[linecnt - 1] = tapct
         if '[CommentsIndentation]' in analize[j]:
             regex = r'.*第(.*)行.*'
             matches = re.findall(regex, analize[j])
             # print(matches)
             tapct = int(matches[0])
-            print("FROM",i,"TO",tapct)
-            for u in range(i,tapct):
-                tapnum[u]=tapnum[0 if i-1==-1 else i-1]
-    for i in range(0,len(code)):
-        if code[i][0]=='@':
-            tapnum[i+1]=max(tapnum[i+1],tapnum[i])
+            print("FROM", i, "TO", tapct)
+            for u in range(i, tapct):
+                tapnum[u] = tapnum[0 if i - 1 == -1 else i - 1]
+    for i in range(0, len(code)):
+        if code[i][0] == '@':
+            tapnum[i + 1] = max(tapnum[i + 1], tapnum[i])
     # tapnum[len(code)-1]=0
     st = -1
     ed = -1
     if noteflag:
-        for i in range(0,len(code)):
+        for i in range(0, len(code)):
             print(code[i], "???", '/*\n')
-            if code[i]=='/*\n':
+            if code[i] == '/*\n':
                 st = i
-            if code[i]=='*/\n':
+            if code[i] == '*/\n':
                 ed = i
                 # print("FIND",st,ed,tapnum[st])
-                tapnum[st] = 0 if st-1==-1 else tapnum[st-1]
-                for u in range(st,ed+1):
-                    tapnum[u]=tapnum[st]
+                tapnum[st] = 0 if st - 1 == -1 else tapnum[st - 1]
+                for u in range(st, ed + 1):
+                    tapnum[u] = tapnum[st]
                 # code[st] = code[st][:-1]+'*\n'
                 # for u in range(st+1, ed+1):
                 #     code[u]=' * '+code[u]
-    for i in range(0,len(code)):
+    for i in range(0, len(code)):
         str = getBlock(tapnum[i])
         # print("此行应当缩进",tapcnt)
         code[i] = str + code[i]
@@ -344,130 +359,170 @@ def solveFirst(code, filename,noteflag):
 
 # TODO 修复BUG
 # 解决需求2的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
-def solveSecond(code, filename):
+def solveSecond(code ,filename):
     # analize = filetools.checkstyle(filename,"result")
     file1 = open(os.path.join("words.txt"), 'r', encoding='UTF-8')
     words = []
     line = file1.readline()
     while line:
         line = file1.readline()
-        words.append(line[:len(line) - 1])
+        words.append(line[:line.__len__() - 1])
         # words.append("'"+line+"'")
+    file1.close()
+
+    keyword = []
+
+    file1  = open( 'keywords.txt', 'r', encoding='UTF-8')
+    line = file1.readline()
+    while line:
+        line = file1.readline()
+        keyword.append(line[:line.__len__() - 1])
+    file1.close()
+
+    #print(keyword)
     # words.append('banana')
-    print(words)
+    #print(words)
     membername = []
     classname = []
     constname = []
-    sign = [' ', ',', ';', ':', '.', '{', '}', '\n']
-    # 注释问题
-    keyword = ['abstract', 'assert', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'const', 'continue',
-               'default', 'do', 'double', 'else', 'enum', 'extends', 'finally', 'float', 'for', 'goto', 'if',
-               'implements', 'import', 'instanceof', 'int', 'interface', 'long', 'native', 'new', 'package', 'private',
-               'protected', 'public', 'return', 'short', 'static', 'strictfp', 'super', 'switch', 'synchronized',
-               'this', 'throw', 'throws', 'transient', 'try', 'void', 'volatile', 'while', 'println']
-    base = ['byte', 'short', 'int', 'long', 'float', 'double', 'boolean', 'char', 'String']
+    methonname = []
+    nochange = []
+    result = []
+    dict ={}
+    zhushi = False
     for codes in code:
+        len = codes.__len__()
+        first = True
+        tmpresult = ''
         classflag = False
         constflag = False
         memberflag = False
-        tmp = re.split('[ (};,:{.\n]', codes)
-        for i in tmp:
-            # print("cas "+ i)
-            if i == 'class':
-                classflag = True
-                constflag = False
-                memberflag = False
-            elif i == 'final':
-                constflag = True
-                classflag = False
-                memberflag = False
-            elif i in keyword:
-                continue
-            elif i in base:
-                memberflag = True
-                classflag = False
-                constflag = False
-            else:
-                if len(i) == 0:
-                    pass
-                elif classflag:
-                    classname.append(i)
-                elif constflag:
-                    constname.append(i)
-                else:
-                    membername.append(i)
-    result = []
-
-    print("classname")
-    print(classname)
-    print("const:")
-    print(constname)
-    print("bianliang:")
-    print(membername)
-    for codes in code:
-        stringflag = False
-        stringone = False
-        tmpresult = ''
+        dotflag = False
+        first = True
         i = 0
-        while i < len(codes):
-            if codes[i] == '"':
-                stringflag = ~stringflag
-                tmpresult += codes[i]
-                i = i + 1
-                continue
-            if codes[i] == "'":
-                stringone = ~stringone
-                tmpresult += codes[i]
-                i = i + 1
-                continue
-            if stringone or stringflag:
-                tmpresult += codes[i]
-                i = i + 1
-                continue
-            if (codes[i] == '"' and stringflag == False) or (codes[i] == "'" and stringone == False):
-                tmpresult += codes[i]
-                i = i + 1
-                continue
-            if codes[i] in sign:
-                tmpresult += codes[i]
-                i = i + 1
-                continue
-            tmp = (re.split('[ };,:{.]', codes[i:]))[0]
-            i = i + len(tmp)
-            if tmp in keyword or tmp in base:
-                tmpresult += tmp
-            elif tmp in constname:
-                tmp1 = tmp.upper()
-                tmpresult += tmp1
-            elif tmp in classname:
-                tmp1 = tmp[:1].upper() + tmp[1:].lower()
-                for j in words:
-                    index = tmp1.find(j)
-                    if index != -1:
-                        pass
+        while i < len:
+            if (codes[i]>='a' and codes[i]<='z') or (codes[i]>='A' and codes[i]<='Z') \
+                 or (codes[i] == '_') or codes[i]=='$':
+                tmpword = ''
+                while i < codes.__len__()-1 and ((codes[i]>='a' and codes[i]<='z') or (codes[i]>='A' and codes[i]<='Z')\
+                                                 or (codes[i] >= '0' and codes[i]<= '9') or (codes[i] == '_') or codes[i]=='$') :
+                    tmpword += codes[i]
+                    i = i + 1
+                if tmpword in classname:
+                    continue
+                if tmpword == 'class':
+                    classflag = True
+                    first = False
+                    constflag = False
+                    continue
+                elif tmpword == 'final':
+                    constflag = True
+                    classflag = False
+                    first = False
+                    continue
+                elif tmpword in keyword or first:
+                    memberflag = True
+                    first = False
+                    continue
+                elif classflag == True:
+                    classname.append(tmpword)
+                    tmp1 = tmpword[:1].upper() + tmpword[1:].lower()
+                    for j in words:
+                        index = tmp1.find(j)
+                        if index != -1:
+                            pass
                         tmp1 = tmp1.replace(j, j.title())
-                if codes[i] == '(':
-                    tmp1 = tmp1[:1].upper() + tmp1[1:]
-                tmpresult += tmp1
-            elif tmp in membername:
-                tmp1 = tmp.lower()
-                for j in words:
-                    index = tmp1[1:].find(j)
-                    if index == -1:
-                        continue
-                    tmp1 = tmp1.replace(j, j.title())
-                if codes[i] == '(':
-                    tmp1 = tmp1[:1].upper() + tmp1[1:]
-                tmpresult += tmp1
+                    dict[tmpword] = tmp1
+                elif constflag == True:
+                    constname.append(tmpword)
+                    dict[tmpword] = tmpword.upper()
+                elif memberflag == True:
+                    membername.append(tmpword)
+                    tmp1 = tmpword.lower()
+                    for j in words:
+                        index = tmp1[1:].find(j)
+                        if index == -1:
+                            continue
+                        tmp1 = tmp1.replace(j, j.title())
+                    dict[tmpword] = tmp1
+                elif codes[i] == '(':
+                    tmp1 = tmpword.lower()
+                    for j in words:
+                        index = tmp1[1:].find(j)
+                        if index == -1:
+                            continue
+                        tmp1 = tmp1.replace(j, j.title())
+                    dict[tmpword] = tmp1
+                    methonname.append(tmpword)
+                elif first == True:
+                    memberflag = True
             else:
-                if i < len(codes) and codes[i] == '(':
-                    tmp = tmp[:1].upper() + tmp[1:]
-                tmpresult += tmp
-        print(tmpresult)
+                i = i + 1
+    for codes in code:
+        len = codes.__len__()
+        first = True
+        tmpresult = ''
+        classflag = False
+        constflag = False
+        memberflag = False
+        dotflag = False
+        i = 0
+        while i < len:
+            if zhushi == True:
+                while i<len:
+                    tmpresult += codes[i]
+                    if i>0 and codes[i]=='/' and codes[i-1] == '*':
+                        zhushi = False
+                        i = i + 1
+                        break
+                    i = i + 1
+            elif codes[i] == '"':
+                tmpresult += codes[i]
+                i = i + 1
+                while codes[i] != '"':
+                    tmpresult += codes[i]
+                    i = i + 1
+                tmpresult += codes[i]
+                i = i+1
+                continue
+            elif i+1<len and codes[i] == '/' and codes[i+1] == '/':
+                while i<len:
+                    tmpresult += codes[i]
+                    i = i + 1
+            elif dotflag == True:
+                while i < codes.__len__()-1 and ((codes[i]>='a' and codes[i]<='z') or (codes[i]>='A' and codes[i]<='Z')\
+                                                 or (codes[i] >= '0' and codes[i]<= '9') or (codes[i] == '_') or codes[i]=='$') :
+                    tmpresult += codes[i]
+                    i = i + 1
+                dotflag = False
+            elif (codes[i]>='a' and codes[i]<='z') or (codes[i]>='A' and codes[i]<='Z') or codes[i] == '_' or codes[i]== '$':
+                tmpword = ''
+                while i < codes.__len__()-1 and ((codes[i]>='a' and codes[i]<='z') or (codes[i]>='A' and codes[i]<='Z')\
+                                                 or (codes[i] >= '0' and codes[i]<= '9') or (codes[i] == '_') or codes[i]=='$') :
+                    tmpword += codes[i]
+                    i = i + 1
+                if tmpword in keyword:
+                    tmpresult += tmpword
+                elif tmpword in classname:
+                    tmpresult += dict[tmpword]
+                elif tmpword in methonname:
+                    tmpresult += dict[tmpword]
+                elif tmpword in constname:
+                    tmpresult += dict[tmpword]
+                elif tmpword in membername:
+                    tmpresult += dict[tmpword]
+                else:
+                    tmpresult += tmpword
+            else:
+                tmpresult += codes[i]
+                if i>0 and codes[i]=='*' and codes[i-1]=='/':
+                    zhushi = True
+                i = i + 1
         result.append(tmpresult)
-    for code in result:
-        print(code, end='')
-    filetools.writetxt(filename, "result", result)
+    print(classname)
+    print(constname)
+    print(membername)
+   # filetools.writetxt(filename, "result", result)
     return result
 
 

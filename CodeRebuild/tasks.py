@@ -5,8 +5,8 @@ from CodeRebuild import filetools
 from CodeRebuild import codetools
 from UserService import models
 
-#celery worker -A CRBS -l debug
-#celery flower --broker=amqp://myuser:mypassword@localhost:5672/vhost
+# celery worker -A CRBS -l debug
+# celery flower --broker=amqp://myuser:mypassword@localhost:5672/vhost
 
 @task
 def add(x,y):

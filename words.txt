@@ -9,12 +9,10 @@ command
 use
 program
 line
-if
 display
 set
 key
 list
-by
 press
 with
 format
@@ -42,7 +40,6 @@ help
 memory
 which
 all
-on
 copy
 shell
 delete
@@ -50,7 +47,6 @@ enter
 margin
 mark
 also
-do
 information
 choose
 select
@@ -78,7 +74,6 @@ parameter
 then
 variable
 tab
-up
 string
 each
 active
@@ -98,7 +93,6 @@ appear
 left
 save
 next
-off
 following
 control
 only
@@ -191,12 +185,10 @@ note
 locate
 video
 printer
-bar
 bottom
 carriage
 content
 either
-ok
 space
 editor
 exist
@@ -246,7 +238,6 @@ close
 combination
 profile
 unless
-so
 except
 turn
 back
@@ -261,7 +252,6 @@ cancel
 document
 case
 numeric
-go
 load
 try
 size
@@ -539,6 +529,9 @@ able
 marking
 ask
 term
+borrow
+engine
+solve
 bring
 warning
 less
@@ -546,7 +539,6 @@ whose
 comment
 effect
 expanding
-on-line
 reorder
 direct
 enclose
@@ -558,7 +550,6 @@ side
 push
 programming
 upper
-row
 pressed
 temporarily
 day
@@ -665,7 +656,6 @@ enough
 although
 reindex
 third
-red
 along
 test
 small
@@ -723,7 +713,6 @@ means
 alternately
 intensity
 reading
-let
 explicitly
 compare
 sector
@@ -797,7 +786,6 @@ easy
 modifier
 invalid
 compiler
-dot
 beep
 face
 random
@@ -835,7 +823,6 @@ platform
 often
 signal
 cpu
-bit
 fully
 deactivate
 especially
@@ -931,7 +918,6 @@ precedence
 skeleton
 log
 star
-hot
 replaceable
 accessible
 involve
@@ -1027,7 +1013,6 @@ eliminate
 actual
 declaration
 probably
-ring
 cover
 indicator
 apple
@@ -1136,7 +1121,6 @@ micro
 beyond
 against
 upon
-service
 little
 exhaust
 choice
@@ -1169,7 +1153,6 @@ translation
 dynamic
 foreground
 preserve
-vice
 necessarily
 circle
 differ
@@ -1698,4 +1681,5 @@ exceeded
 numerical
 digital
 combo
-cord
+record
+id
