@@ -45,7 +45,7 @@ def solve(filename, multiif_to_if, for_to_while, switch_to_if):
     code = solveFirst(code, filename, False)
     for codes in code:
         print(codes)
-    print("跳过Step2")
+    print("Step2")
     code = solveSecond(code, filename)
 
     for codes in code:
@@ -53,9 +53,12 @@ def solve(filename, multiif_to_if, for_to_while, switch_to_if):
 
     print("现在进入Step3")
     code = solveThird(code, filename, multiif_to_if, for_to_while, switch_to_if)
-    print(code)
-    print("重构结束")
+    print("STEP3结束")
+    for cod in code:
+        print(cod)
+
     code = solveFirst(code, filename, True)
+    print("重构结束")
     code = hock(code)
     return filename
 
@@ -152,7 +155,7 @@ def solveFirst(code, filename, noteflag):
                 j+5<len(code[i])and code[i][j]=='w' and code[i][j+1]=='h' and code[i][j+2] and code[i][j+3]=='i'
                 and code[i][j+4]=='l'and code[i][j+5]=='e')or(j+3<len(code[i])and code[i][j]=='e' and code[i][j+1]=='l'
             and code[i][j+2]=='s' and code[i][j+3]=='e')or (j+1<len(code[i])and code[i][j]=='i'and code[i][j+1]=='f')):
-                print("DEAL",code[i])
+                # print("DEAL",code[i])
                 cnt_ll = 0
                 dealed = False
                 if code[i][j]=='e':
@@ -175,7 +178,7 @@ def solveFirst(code, filename, noteflag):
                             strlist.insert(u + 1, '\n')
                             code[i] = "".join(strlist)
                             break
-                print("FIN", code[i])
+                # print("FIN", code[i])
     # 写入到文件中
     filetools.writetxt(filename, "result", code)
     # 再次读取到文件中
@@ -284,7 +287,7 @@ def solveFirst(code, filename, noteflag):
         # 需要括号 进行扫描和处理，添加左括号和右括号
         if 'NeedBraces' in analize[j]:
             matches = analize[j].split('\'')
-            print('matches=', matches)
+            # print('matches=', matches)
             if matches[1] == 'else':
                 cnt = code[i].index('else')
                 strlist = list(code[i])
@@ -305,7 +308,9 @@ def solveFirst(code, filename, noteflag):
                         strlist.insert(k + 1, '{\n')
                         code[i] = "".join(strlist)
                         break
+            cnt_l = 0
             for u in range(i, len(code)):
+                print(code[u],"??",cnt_l)
                 flag = False
                 pos = -1
                 cntl = 0
@@ -314,7 +319,11 @@ def solveFirst(code, filename, noteflag):
                         cntl += 1
                     if code[u][v] == ')' and v > 0 and code[u][v - 1] != '\\':
                         cntl -= 1
-                    if (code[u][v] == ';' and v > 0 and code[u][v - 1] != '\\' and cntl == 0):
+                    if code[u][v] == '{' and (v > 0 or v == 0) and code[u][v - 1] != '\\':
+                            cnt_l += 1
+                    if code[u][v] == '}' and  (v > 0 or v == 0) and code[u][v - 1] != '\\':
+                            cnt_l -= 1
+                    if ((code[u][v] == ';' or code[u][v]=='}') and (v > 0 or v==0) and code[u][v - 1] != '\\' and cntl == 0 and cnt_l == 1):
                         flag = True
                         pos = v
                         break
@@ -337,9 +346,9 @@ def solveFirst(code, filename, noteflag):
         else:
             result.append(code[i])
     code = result
-    print("F Result=")
-    for codes in code:
-        print(codes)
+    # print("F Result=")
+    # for codes in code:
+    #     print(codes)
     filetools.writetxt(filename, "result", code)
     code = filetools.readCode(filename, "result")
     analize = filetools.checkstyle(filename, "result")
@@ -409,7 +418,7 @@ def solveFirst(code, filename, noteflag):
         if 'Indentation' in analize[j]:
             regex = r'.*应为(.*)个.*'
             matches = re.findall(regex, analize[j])
-            print(matches)
+            # print(matches)
             tapct = int(matches[0])
             tapct *= 2
             tapnum[linecnt - 1] = tapct
@@ -418,7 +427,7 @@ def solveFirst(code, filename, noteflag):
             matches = re.findall(regex, analize[j])
             # print(matches)
             tapct = int(matches[0])
-            print("FROM", i, "TO", tapct)
+            # print("FROM", i, "TO", tapct)
             for u in range(i, tapct):
                 tapnum[u] = tapnum[0 if i - 1 == -1 else i - 1]
     for i in range(0, len(code)):
@@ -427,10 +436,11 @@ def solveFirst(code, filename, noteflag):
     # tapnum[len(code)-1]=0
     st = -1
     ed = -1
+    # 看看是不是需要处理注释部分
     if noteflag:
         for i in range(0, len(code)):
-            print(code[i], "???", '/*\n')
-            if code[i] == '/*\n':
+            # print(code[i], "???", '/*\n')
+            if code[i][0] == '/' and code[i][1]=='*':
                 st = i
             if code[i] == '*/\n':
                 ed = i
@@ -445,7 +455,7 @@ def solveFirst(code, filename, noteflag):
         str = getBlock(tapnum[i])
         # print("此行应当缩进",tapcnt)
         code[i] = str + code[i]
-        print(code[i])
+        # print(code[i])
     filetools.writetxt(filename, "result", code)
     code = filetools.readCode(filename, "result")
     for i in range(0, len(code)):
@@ -748,8 +758,9 @@ def solveThird(code, filename, multiif_to_if, for_to_while, switch_to_if):
                     cur += 1
 
         cur += 1
-    for codes in code:
-        print(codes)
+    # for codes in code:
+    #     print(codes)
     filetools.writetxt(filename, "result", code)
+    code = filetools.readCode(filename,"result")
     # analize = filetools.checkstyle(filename,"result")
     return code
