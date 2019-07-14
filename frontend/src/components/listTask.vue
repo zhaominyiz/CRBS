@@ -8,14 +8,14 @@
     </Row>
     <div style="margin: 10px;overflow: visible">
       <div style="float: right;">
-<!--        <Page :total="cnt" :page-size="pageSize"-->
-<!--              show-sizer :current="1" :page-size-opts="[5, 10]"-->
-<!--              @on-change="changePage" @on-page-size-change="changePageSize"-->
-<!--        show-total-->
-<!--        ></Page>-->
+        <!--        <Page :total="cnt" :page-size="pageSize"-->
+        <!--              show-sizer :current="1" :page-size-opts="[5, 10]"-->
+        <!--              @on-change="changePage" @on-page-size-change="changePageSize"-->
+        <!--        show-total-->
+        <!--        ></Page>-->
         <Page :total="cnt" :current="currentPage" :page-size="pageSize" show-elevator show-sizer show-total
-placement="top" @on-change="changePage" @on-page-size-change='changePageSize'
-        :page-size-opts="[6]"></Page>
+              placement="top" @on-change="changePage" @on-page-size-change='changePageSize'
+              :page-size-opts="[6]"></Page>
       </div>
     </div>
   </div>

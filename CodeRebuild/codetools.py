@@ -1,17 +1,17 @@
-"""
-@author 马靖豪 赵珉怿 黄伟杰
-@desc 本模块为代码重构系统的后端核心模块 分为3个小模块完成功能性需求
-@date 2019/7/14
-说明：
-classes:codetools()，具有hock(),solve(),getBlock(),fixLeftAndEmpty(),solveFirst(),solveSecond(),solveThird()方法
-
-"""
 
 import os
 import CodeRebuild.filetools as filetools
 import re
 from django.http import HttpResponse
+"""
+@author 马靖豪 赵珉怿 黄伟杰
+@desc 本模块为代码重构系统的后端核心模块 分为3个小模块完成功能性需求
+@date 2019/7/14
+@copyright 南京理工大学 计算机科学与工程学院 剁椒鱼头队
+说明：
+classes:codetools()，具有hock(),solve(),getBlock(),fixLeftAndEmpty(),solveFirst(),solveSecond(),solveThird()方法
 
+"""
 """
 @author 赵珉怿
 @desc 此函数为模板设计方法的内置钩子函数 子类可以根据自己的需求去改写此函数
@@ -139,47 +139,57 @@ def solveFirst(code, filename, noteflag):
     code = fixLeftAndEmpty(code)
     # 再对一些语句进行换行的操作 如; 如循环语句
     for i in range(0, len(code)):
+        # 标记引号和括号的个数 cnt%2==0 表示被引号包住了 cnt_k同理
         cnt = 0
         cnt_k = 0
+        # 遍历code数组
         for j in range(0, len(code[i]) - 1):
             if code[i][j] == '"': cnt += 1
             if code[i][j] == '(' and cnt % 2 == 0:
                 cnt_k += 1
             if code[i][j] == ')' and cnt % 2 == 0:
                 cnt_k -= 1
+            # 符合条件添加换行号
             if code[i][j] == ';' and cnt % 2 == 0 and code[i][j + 1] != '\n' and cnt_k == 0:
                 strlist = list(code[i])
                 strlist.insert(j + 1, '\n')
                 code[i] = "".join(strlist)
-            if cnt % 2 == 0 and ((j+2<len(code[i])and code[i][j]=='f'and code[i][j+1]=='o'and code[i][j+2]=='r')or(
-                j+5<len(code[i])and code[i][j]=='w' and code[i][j+1]=='h' and code[i][j+2] and code[i][j+3]=='i'
-                and code[i][j+4]=='l'and code[i][j+5]=='e')or(j+3<len(code[i])and code[i][j]=='e' and code[i][j+1]=='l'
-            and code[i][j+2]=='s' and code[i][j+3]=='e')or (j+1<len(code[i])and code[i][j]=='i'and code[i][j+1]=='f')):
-                # print("DEAL",code[i])
+            # 去除并判断 for while else 等语句
+            if cnt % 2 == 0 and ((j + 2 < len(code[i]) and code[i][j] == 'f' and code[i][j + 1] == 'o' and code[i][
+                j + 2] == 'r') or (
+                                         j + 5 < len(code[i]) and code[i][j] == 'w' and code[i][j + 1] == 'h' and
+                                         code[i][j + 2] and code[i][j + 3] == 'i'
+                                         and code[i][j + 4] == 'l' and code[i][j + 5] == 'e') or (
+                                         j + 3 < len(code[i]) and code[i][j] == 'e' and code[i][j + 1] == 'l'
+                                         and code[i][j + 2] == 's' and code[i][j + 3] == 'e') or (
+                                         j + 1 < len(code[i]) and code[i][j] == 'i' and code[i][j + 1] == 'f')):
+                # 用于记录括号数
                 cnt_ll = 0
+                # 此标记用于判断是否已经进行断行操作，避免多余操作
                 dealed = False
-                if code[i][j]=='e':
+                if code[i][j] == 'e':
                     dealed = True
-                    for u in  range(j+1,len(code[i])-1):
-                        if code[i][u]==' ':
-                            if code[i][u+1]!='i':
+                    for u in range(j + 1, len(code[i]) - 1):
+                        if code[i][u] == ' ':
+                            if code[i][u + 1] != 'i':
                                 strlist = list(code[i])
                                 strlist.insert(u + 1, '\n')
                                 code[i] = "".join(strlist)
                             break
-                if dealed:continue
-                for u in range(j+1,len(code[i])-1):
-                    if code[i][u]=='(' and code[i][u-1]!='\\':
-                        cnt_ll+=1
-                    if code[i][u]==')' and code[i][u-1]!='\\':
-                        cnt_ll-=1
-                        if cnt_ll == 0 and code[i][u+1]!='\n':
+                if dealed: continue
+                # 用于找到括号右边的位置，进行断行
+                for u in range(j + 1, len(code[i]) - 1):
+                    if code[i][u] == '(' and code[i][u - 1] != '\\':
+                        cnt_ll += 1
+                    if code[i][u] == ')' and code[i][u - 1] != '\\':
+                        cnt_ll -= 1
+                        if cnt_ll == 0 and code[i][u + 1] != '\n':
                             strlist = list(code[i])
                             strlist.insert(u + 1, '\n')
                             code[i] = "".join(strlist)
                             break
                 # print("FIN", code[i])
-    # 写入到文件中
+    # 写入到文件中 使得换行符发挥作用
     filetools.writetxt(filename, "result", code)
     # 再次读取到文件中
     code = filetools.readCode(filename, "result")
@@ -213,7 +223,7 @@ def solveFirst(code, filename, noteflag):
                 code[u] = "".join(strlist)
             if (code[u][v] == '{') and v > 0 and code[u][v - 1] != '\\':
                 strlist = list(code[u])
-                strlist.insert(v+1, '\n')
+                strlist.insert(v + 1, '\n')
                 code[u] = "".join(strlist)
 
             # 处理注释
@@ -241,11 +251,11 @@ def solveFirst(code, filename, noteflag):
             strlist = list(code[u])
             tmp = 0
             for v in range(0, len(code[u])):
-                if code[u][v]=='"':cnt_l+=1
+                if code[u][v] == '"': cnt_l += 1
                 if code[u][v] == ':' and code[u][v - 1] != '\\':
                     tmp = v
                     break
-            if cnt_l%2==0:
+            if cnt_l % 2 == 0:
                 strlist.insert(tmp + 1, '\n')
                 code[u] = "".join(strlist)
 
@@ -310,7 +320,7 @@ def solveFirst(code, filename, noteflag):
                         break
             cnt_l = 0
             for u in range(i, len(code)):
-                print(code[u],"??",cnt_l)
+                # print(code[u], "??", cnt_l)
                 flag = False
                 pos = -1
                 cntl = 0
@@ -320,10 +330,11 @@ def solveFirst(code, filename, noteflag):
                     if code[u][v] == ')' and v > 0 and code[u][v - 1] != '\\':
                         cntl -= 1
                     if code[u][v] == '{' and (v > 0 or v == 0) and code[u][v - 1] != '\\':
-                            cnt_l += 1
-                    if code[u][v] == '}' and  (v > 0 or v == 0) and code[u][v - 1] != '\\':
-                            cnt_l -= 1
-                    if ((code[u][v] == ';' or code[u][v]=='}') and (v > 0 or v==0) and code[u][v - 1] != '\\' and cntl == 0 and cnt_l == 1):
+                        cnt_l += 1
+                    if code[u][v] == '}' and (v > 0 or v == 0) and code[u][v - 1] != '\\':
+                        cnt_l -= 1
+                    if ((code[u][v] == ';' or code[u][v] == '}') and (v > 0 or v == 0) and code[u][
+                        v - 1] != '\\' and cntl == 0 and cnt_l == 1):
                         flag = True
                         pos = v
                         break
@@ -359,7 +370,7 @@ def solveFirst(code, filename, noteflag):
     exadd = 0
     record_w = -1
     # 用于记录上一层次空了几格
-    fa_tap = 0
+
     while True:
         if i >= len(code) and j >= len(analize) - 1:
             break
@@ -439,12 +450,10 @@ def solveFirst(code, filename, noteflag):
     # 看看是不是需要处理注释部分
     if noteflag:
         for i in range(0, len(code)):
-            # print(code[i], "???", '/*\n')
-            if code[i][0] == '/' and code[i][1]=='*':
+            if code[i][0] == '/' and code[i][1] == '*':
                 st = i
             if code[i] == '*/\n':
                 ed = i
-                # print("FIND",st,ed,tapnum[st])
                 tapnum[st] = 0 if st - 1 == -1 else tapnum[st - 1]
                 for u in range(st, ed + 1):
                     tapnum[u] = tapnum[st]
@@ -468,11 +477,19 @@ def solveFirst(code, filename, noteflag):
     return filetools.readCode(filename, "result")
 
 
-# TODO 修复BUG
-# 解决需求2的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
+"""
+@author 黄伟杰
+@desc 此函数为流程的第二步，代码类名变换
+@date 2019/7/14
+
+@input code：需要处理的代码数组 filename：代码的文件 
+@output code：进行处理后的代码数组
+
+"""
 def solveSecond(code, filename):
-    # analize = filetools.checkstyle(filename,"result")
     file1 = open(os.path.join("words.txt"), 'r', encoding='UTF-8')
+    # word列表为单词表 筛选自高频单词 用于驼峰命名法改正一些命名的问题
+    # 后期用户可以自行维护此单词表
     words = []
     line = file1.readline()
     while line:
@@ -480,7 +497,7 @@ def solveSecond(code, filename):
         words.append(line[:line.__len__() - 1])
         # words.append("'"+line+"'")
     file1.close()
-
+    # keyword列表定义了一些关键词 这些关键字不应当被予以修改
     keyword = []
 
     file1 = open('keywords.txt', 'r', encoding='UTF-8')
@@ -641,7 +658,15 @@ def solveSecond(code, filename):
     return result
 
 
-# 我要找到后括号在啥子鬼地方
+"""
+@author 马靖豪
+@desc 此函数为找到一行语句后面的花括号是在什么位置
+@date 2019/7/14
+
+@input code：需要处理的代码数组 st：行号 i：行号的单词号
+@output code：进行处理后的代码数组
+
+"""
 def findhkh(code, st, i):
     str = code[i].split(st, 1)[0] + '}'
     i += 1
@@ -652,8 +677,18 @@ def findhkh(code, st, i):
     return -1
 
 
-# 解决需求3的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
-# TODO 实现本函数
+"""
+@author 马靖豪
+@desc 此函数为流程的第三步，用于解决各种语句互转的问题
+@date 2019/7/14
+
+@input code：需要处理的代码数组 filename：代码的文件 
+multiif_to_if：是否需要将多if语句和一条if语句互相转换
+for_to_while：是否需要将for语句while语句互相转换
+switch_to_if：是否需要将switch和if语句互相转换
+@output code：进行处理后的代码数组
+
+"""
 def solveThird(code, filename, multiif_to_if, for_to_while, switch_to_if):
     base = ['byte', 'short', 'int', 'long', 'float', 'double', 'boolean', 'char', 'integer']
     print("3333333333sth  !!!   code:")
@@ -761,6 +796,6 @@ def solveThird(code, filename, multiif_to_if, for_to_while, switch_to_if):
     # for codes in code:
     #     print(codes)
     filetools.writetxt(filename, "result", code)
-    code = filetools.readCode(filename,"result")
+    code = filetools.readCode(filename, "result")
     # analize = filetools.checkstyle(filename,"result")
     return code

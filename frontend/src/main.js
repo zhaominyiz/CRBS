@@ -23,14 +23,14 @@ if (process.env.NODE_ENV === 'production') {
   Vue.http.options.root = 'http://localhost:8666'
 }
 // Vue.prototype.$http=axios
-Vue.prototype.$ajax= axios
+Vue.prototype.$ajax = axios
 Vue.http.options.emulateJSON = true;
-Vue.http.interceptors.push(function(request, next) {
+Vue.http.interceptors.push(function (request, next) {
   // modify request
-  if(store.state.token)
+  if (store.state.token)
     request.headers.set('Authorization', `Bearer ${store.state.token}`);
-  next( (response) => {
-    if(response.status == 401){
+  next((response) => {
+    if (response.status == 401) {
       // 登录状态失败
       store.commit('clearToken')
       vm.$Notice.error({
