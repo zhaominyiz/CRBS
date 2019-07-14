@@ -1,11 +1,42 @@
+"""
+@author 马靖豪 赵珉怿 黄伟杰
+@desc 本模块为代码重构系统的后端核心模块 分为3个小模块完成功能性需求
+@date 2019/7/14
+说明：
+classes:codetools()，具有hock(),solve(),getBlock(),fixLeftAndEmpty(),solveFirst(),solveSecond(),solveThird()方法
+
+"""
+
 import os
 import CodeRebuild.filetools as filetools
 import re
 from django.http import HttpResponse
 
+"""
+@author 赵珉怿
+@desc 此函数为模板设计方法的内置钩子函数 子类可以根据自己的需求去改写此函数
+@date 2019/7/14
+
+@input code:输入修改之前的code代码数组
+@output code:输出修改之后的code代码数组
+
+"""
+
 
 def hock(code):
     return code
+
+
+"""
+@author 赵珉怿
+@desc 此函数为这个类的进入的函数，即模板方法的初始进入函数，定义了4步算法的基本操作
+@date 2019/7/14
+
+@input filename：文件名 multiif_to_if:多个if语句转一条if语句的需求 for_to_while：for语句转while语句的需求
+switch_to_if：switch 语句转if语句的需求
+@output filename:输出修改之后的文件名
+
+"""
 
 
 def solve(filename, multiif_to_if, for_to_while, switch_to_if):
@@ -29,7 +60,17 @@ def solve(filename, multiif_to_if, for_to_while, switch_to_if):
     return filename
 
 
-# 生成空格的函数
+"""
+@author 赵珉怿
+@desc 此函数为返回固定格数空格的方法
+@date 2019/7/12
+
+@input cnt:想要空格的长度
+@output str：cnt长度的空格
+
+"""
+
+
 def getBlock(cnt):
     str = ''
     for i in range(0, cnt):
@@ -37,13 +78,22 @@ def getBlock(cnt):
     return str
 
 
-# 解决需求1的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
-# 此步应当解决代码格式问题
+"""
+@author 赵珉怿
+@desc 此函数为消除函数左侧的留空
+@date 2019/7/12
+
+@input code:想要进行处理的代码
+@output code：处理完毕的代码
+
+"""
+
+
 def fixLeftAndEmpty(code):
     for i in range(0, len(code)):
         code[i] = code[i].lstrip()
         flag = False
-        print(code[i], len(code[i]))
+        # print(code[i], len(code[i]))
         j = 0
         while j < len(code[i]):
 
@@ -70,13 +120,21 @@ def fixLeftAndEmpty(code):
     return code
 
 
-# 第一步 代码格式重构
-# 采用CheckStyle
-# 赵珉怿
+"""
+@author 赵珉怿
+@desc 此函数为流程的第一步，代码格式重构 进行添加' '、缩进、换行等功能
+@date 2019/7/14
+
+@input code：需要处理的代码数组 filename：代码的文件 noteflag：是否需要处理注释
+@output code：进行处理后的代码数组
+
+"""
+
+
 def solveFirst(code, filename, noteflag):
     # 先去除左边的空格号
     code = fixLeftAndEmpty(code)
-    # 再消除一下一行语句太多;
+    # 再对一些语句进行换行的操作 如; 如循环语句
     for i in range(0, len(code)):
         cnt = 0
         cnt_k = 0
@@ -90,10 +148,40 @@ def solveFirst(code, filename, noteflag):
                 strlist = list(code[i])
                 strlist.insert(j + 1, '\n')
                 code[i] = "".join(strlist)
+            if cnt % 2 == 0 and ((j+2<len(code[i])and code[i][j]=='f'and code[i][j+1]=='o'and code[i][j+2]=='r')or(
+                j+5<len(code[i])and code[i][j]=='w' and code[i][j+1]=='h' and code[i][j+2] and code[i][j+3]=='i'
+                and code[i][j+4]=='l'and code[i][j+5]=='e')or(j+3<len(code[i])and code[i][j]=='e' and code[i][j+1]=='l'
+            and code[i][j+2]=='s' and code[i][j+3]=='e')or (j+1<len(code[i])and code[i][j]=='i'and code[i][j+1]=='f')):
+                print("DEAL",code[i])
+                cnt_ll = 0
+                dealed = False
+                if code[i][j]=='e':
+                    dealed = True
+                    for u in  range(j+1,len(code[i])-1):
+                        if code[i][u]==' ':
+                            if code[i][u+1]!='i':
+                                strlist = list(code[i])
+                                strlist.insert(u + 1, '\n')
+                                code[i] = "".join(strlist)
+                            break
+                if dealed:continue
+                for u in range(j+1,len(code[i])-1):
+                    if code[i][u]=='(' and code[i][u-1]!='\\':
+                        cnt_ll+=1
+                    if code[i][u]==')' and code[i][u-1]!='\\':
+                        cnt_ll-=1
+                        if cnt_ll == 0 and code[i][u+1]!='\n':
+                            strlist = list(code[i])
+                            strlist.insert(u + 1, '\n')
+                            code[i] = "".join(strlist)
+                            break
+                print("FIN", code[i])
     # 写入到文件中
     filetools.writetxt(filename, "result", code)
+    # 再次读取到文件中
+    code = filetools.readCode(filename, "result")
 
-    # 先去除一行的多条语句
+    # 再去除一行的多条语句
     for u in range(0, len(code)):
         # 标记匹配到的左括号数
         cntj = 0
@@ -120,6 +208,11 @@ def solveFirst(code, filename, noteflag):
                 strlist = list(code[u])
                 strlist.insert(v, '\n')
                 code[u] = "".join(strlist)
+            if (code[u][v] == '{') and v > 0 and code[u][v - 1] != '\\':
+                strlist = list(code[u])
+                strlist.insert(v+1, '\n')
+                code[u] = "".join(strlist)
+
             # 处理注释
             if (code[u][v] == '/' and v != len(code[u]) - 1 and code[u][v + 1] == '*') and v > 0 and code[u][
                 v - 1] != '\\':
@@ -137,25 +230,32 @@ def solveFirst(code, filename, noteflag):
                 strlist = list(code[u])
                 strlist.insert(v, '\n')
                 code[u] = "".join(strlist)
+
+    # 处理case 和 default的特殊情况
     for u in range(0, len(code)):
         if 'case' in code[u] or 'default' in code[u]:
+            cnt_l = 0
             strlist = list(code[u])
             tmp = 0
             for v in range(0, len(code[u])):
+                if code[u][v]=='"':cnt_l+=1
                 if code[u][v] == ':' and code[u][v - 1] != '\\':
                     tmp = v
                     break
-            strlist.insert(tmp + 1, '\n')
-            code[u] = "".join(strlist)
+            if cnt_l%2==0:
+                strlist.insert(tmp + 1, '\n')
+                code[u] = "".join(strlist)
 
-    print("!?!?")
-    for codes in code:
-        print(codes)
+    # print("!?!?")
+    # for codes in code:
+    #     print(codes)
 
+    # 再次读入准备进行下一步操作
     filetools.writetxt(filename, "result", code)
     code = filetools.readCode(filename, "result")
     analize = filetools.checkstyle(filename, "result")
 
+    # i 指的是代码的行数 j指的是分析的行数
     i = 0
     j = 1
     lazy = -1
@@ -181,7 +281,7 @@ def solveFirst(code, filename, noteflag):
             # result.append(code[i])
             i += 1
             continue
-        # 需要空行，默认为下2行
+        # 需要括号 进行扫描和处理，添加左括号和右括号
         if 'NeedBraces' in analize[j]:
             matches = analize[j].split('\'')
             print('matches=', matches)
@@ -267,6 +367,7 @@ def solveFirst(code, filename, noteflag):
             i += 1
             continue
 
+        # 处理需要空格 记录这一行被处理了多少次此类事件
         if 'WhitespaceAround' in analize[j]:
             regex = r".*\'(.*)\'.*"
             matches = re.findall(regex, analize[j])
@@ -359,7 +460,7 @@ def solveFirst(code, filename, noteflag):
 
 # TODO 修复BUG
 # 解决需求2的方法，输入为code[]，输出应为解决掉问题的code[]，作为下一步输出
-def solveSecond(code ,filename):
+def solveSecond(code, filename):
     # analize = filetools.checkstyle(filename,"result")
     file1 = open(os.path.join("words.txt"), 'r', encoding='UTF-8')
     words = []
@@ -372,23 +473,23 @@ def solveSecond(code ,filename):
 
     keyword = []
 
-    file1  = open( 'keywords.txt', 'r', encoding='UTF-8')
+    file1 = open('keywords.txt', 'r', encoding='UTF-8')
     line = file1.readline()
     while line:
         line = file1.readline()
         keyword.append(line[:line.__len__() - 1])
     file1.close()
 
-    #print(keyword)
+    # print(keyword)
     # words.append('banana')
-    #print(words)
+    # print(words)
     membername = []
     classname = []
     constname = []
     methonname = []
     nochange = []
     result = []
-    dict ={}
+    dict = {}
     zhushi = False
     for codes in code:
         len = codes.__len__()
@@ -401,11 +502,12 @@ def solveSecond(code ,filename):
         first = True
         i = 0
         while i < len:
-            if (codes[i]>='a' and codes[i]<='z') or (codes[i]>='A' and codes[i]<='Z') \
-                 or (codes[i] == '_') or codes[i]=='$':
+            if (codes[i] >= 'a' and codes[i] <= 'z') or (codes[i] >= 'A' and codes[i] <= 'Z') \
+                    or (codes[i] == '_') or codes[i] == '$':
                 tmpword = ''
-                while i < codes.__len__()-1 and ((codes[i]>='a' and codes[i]<='z') or (codes[i]>='A' and codes[i]<='Z')\
-                                                 or (codes[i] >= '0' and codes[i]<= '9') or (codes[i] == '_') or codes[i]=='$') :
+                while i < codes.__len__() - 1 and (
+                        (codes[i] >= 'a' and codes[i] <= 'z') or (codes[i] >= 'A' and codes[i] <= 'Z') \
+                        or (codes[i] >= '0' and codes[i] <= '9') or (codes[i] == '_') or codes[i] == '$'):
                     tmpword += codes[i]
                     i = i + 1
                 if tmpword in classname:
@@ -469,9 +571,9 @@ def solveSecond(code ,filename):
         i = 0
         while i < len:
             if zhushi == True:
-                while i<len:
+                while i < len:
                     tmpresult += codes[i]
-                    if i>0 and codes[i]=='/' and codes[i-1] == '*':
+                    if i > 0 and codes[i] == '/' and codes[i - 1] == '*':
                         zhushi = False
                         i = i + 1
                         break
@@ -483,22 +585,25 @@ def solveSecond(code ,filename):
                     tmpresult += codes[i]
                     i = i + 1
                 tmpresult += codes[i]
-                i = i+1
+                i = i + 1
                 continue
-            elif i+1<len and codes[i] == '/' and codes[i+1] == '/':
-                while i<len:
+            elif i + 1 < len and codes[i] == '/' and codes[i + 1] == '/':
+                while i < len:
                     tmpresult += codes[i]
                     i = i + 1
             elif dotflag == True:
-                while i < codes.__len__()-1 and ((codes[i]>='a' and codes[i]<='z') or (codes[i]>='A' and codes[i]<='Z')\
-                                                 or (codes[i] >= '0' and codes[i]<= '9') or (codes[i] == '_') or codes[i]=='$') :
+                while i < codes.__len__() - 1 and (
+                        (codes[i] >= 'a' and codes[i] <= 'z') or (codes[i] >= 'A' and codes[i] <= 'Z') \
+                        or (codes[i] >= '0' and codes[i] <= '9') or (codes[i] == '_') or codes[i] == '$'):
                     tmpresult += codes[i]
                     i = i + 1
                 dotflag = False
-            elif (codes[i]>='a' and codes[i]<='z') or (codes[i]>='A' and codes[i]<='Z') or codes[i] == '_' or codes[i]== '$':
+            elif (codes[i] >= 'a' and codes[i] <= 'z') or (codes[i] >= 'A' and codes[i] <= 'Z') or codes[i] == '_' or \
+                    codes[i] == '$':
                 tmpword = ''
-                while i < codes.__len__()-1 and ((codes[i]>='a' and codes[i]<='z') or (codes[i]>='A' and codes[i]<='Z')\
-                                                 or (codes[i] >= '0' and codes[i]<= '9') or (codes[i] == '_') or codes[i]=='$') :
+                while i < codes.__len__() - 1 and (
+                        (codes[i] >= 'a' and codes[i] <= 'z') or (codes[i] >= 'A' and codes[i] <= 'Z') \
+                        or (codes[i] >= '0' and codes[i] <= '9') or (codes[i] == '_') or codes[i] == '$'):
                     tmpword += codes[i]
                     i = i + 1
                 if tmpword in keyword:
@@ -515,14 +620,14 @@ def solveSecond(code ,filename):
                     tmpresult += tmpword
             else:
                 tmpresult += codes[i]
-                if i>0 and codes[i]=='*' and codes[i-1]=='/':
+                if i > 0 and codes[i] == '*' and codes[i - 1] == '/':
                     zhushi = True
                 i = i + 1
         result.append(tmpresult)
     print(classname)
     print(constname)
     print(membername)
-   # filetools.writetxt(filename, "result", result)
+    # filetools.writetxt(filename, "result", result)
     return result
 
 

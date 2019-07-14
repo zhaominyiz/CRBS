@@ -172,10 +172,10 @@ export default {
                 },
                 {
                     'value': '1',
-                    'label': '将多条件if语句转多if语句'
+                    'label': '将一条if语句转多条if语句'
                 },{
                     'value': '2',
-                    'label': '将多条if语句转多条件if语句'
+                    'label': '将多条if语句转一条if语句'
                 }
             ]
         }
