@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d2903736-e227-493a-b90b-65e08c540a39" name="Default Changelist" comment="修改了后端的有关注释的代码问题&#10;赵珉怿 7.13">
+    <list default="true" id="d2903736-e227-493a-b90b-65e08c540a39" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CodeRebuild/codetools.py" beforeDir="false" afterPath="$PROJECT_DIR$/CodeRebuild/codetools.py" afterDir="false" />
     </list>
@@ -31,80 +31,51 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/components/newTask.vue">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/result.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="177" column="40" selection-start-line="177" selection-start-column="40" selection-end-line="177" selection-end-column="40" />
-              <folding>
-                <element signature="n#style#0;n#Select#0;n#Form-item#0;n#Form#1;n#Row#1;n#Card#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#Select#0;n#Form-item#1;n#Form#1;n#Row#1;n#Card#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#Select#0;n#Form-item#2;n#Form#1;n#Row#1;n#Card#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#Select#0;n#Form-item#3;n#Form#1;n#Row#1;n#Card#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#Select#0;n#Form-item#4;n#Form#1;n#Row#1;n#Card#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i-button#0;n#Upload#0;n#Form#2;n#Row#1;n#Card#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="114">
+              <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CodeRebuild/codetools.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/userInfo.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="442" column="51" selection-start-line="442" selection-start-column="51" selection-end-line="442" selection-end-column="51" />
+            <state relative-caret-position="209">
+              <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/router/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
               <folding>
-                <element signature="e#0#168#1" />
-                <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#866#1764#0" />
-                <element signature="e#11975#18214#0" />
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/result/IL1AiihESdh.java">
+        <entry file="file://$PROJECT_DIR$/frontend/src/App.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="228">
-              <caret line="48" column="26" lean-forward="true" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+              <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/index.html">
+        <entry file="file://$PROJECT_DIR$/frontend/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/keywords.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1814">
-              <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/words.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="1683" column="6" selection-start-line="1683" selection-start-column="6" selection-end-line="1683" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CodeRebuild/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="81" selection-start-line="81" selection-end-line="86" selection-end-column="17" />
+            <state relative-caret-position="722">
+              <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
+                <element signature="e#0#22#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -113,10 +84,27 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CodeRebuild/tasks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="32" />
+            <state relative-caret-position="209">
+              <caret line="11" column="13" lean-forward="true" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CodeRebuild/codetools.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1349">
+              <caret line="59" column="43" lean-forward="true" selection-start-line="59" selection-start-column="43" selection-end-line="59" selection-end-column="43" />
+              <folding>
+                <element signature="e#1432#1502#0" />
+                <element signature="e#1639#2539#0" />
+                <element signature="e#2748#15755#0" />
+                <element signature="e#15919#22859#0" />
+                <element signature="e#22474#22630#0" />
+                <element signature="e#22950#29638#0" />
               </folding>
             </state>
           </provider>
@@ -181,34 +169,36 @@
         <option value="$PROJECT_DIR$/frontend/package.json" />
         <option value="$PROJECT_DIR$/venv/Lib/site-packages/django/db/backends/mysql/base.py" />
         <option value="$PROJECT_DIR$/venv/Lib/site-packages/django/db/backends/mysql/operations.py" />
-        <option value="$PROJECT_DIR$/frontend/src/store/actions.js" />
         <option value="$PROJECT_DIR$/CRBS/urls.py" />
         <option value="$PROJECT_DIR$/UserService/views.py" />
         <option value="$PROJECT_DIR$/frontend/config/index.js" />
-        <option value="$PROJECT_DIR$/frontend/src/App.vue" />
         <option value="$PROJECT_DIR$/frontend/src/components/codeFragment.vue" />
-        <option value="$PROJECT_DIR$/frontend/src/router/index.js" />
-        <option value="$PROJECT_DIR$/CodeRebuild/filetools.py" />
         <option value="$PROJECT_DIR$/frontend/babel.config.js" />
-        <option value="$PROJECT_DIR$/frontend/src/main.js" />
         <option value="$PROJECT_DIR$/frontend/.babelrc" />
         <option value="$PROJECT_DIR$/CodeRebuild/views.py" />
-        <option value="$PROJECT_DIR$/frontend/src/components/listTask.vue" />
         <option value="$PROJECT_DIR$/frontend/index.html" />
         <option value="$PROJECT_DIR$/result/xZlSiUEJuK5.java" />
-        <option value="$PROJECT_DIR$/frontend/src/components/result.vue" />
         <option value="$PROJECT_DIR$/CodeRebuild/tasks.py" />
-        <option value="$PROJECT_DIR$/frontend/src/components/index.vue" />
         <option value="$PROJECT_DIR$/result/aMzB367HeuU.java" />
         <option value="$PROJECT_DIR$/keywords.txt" />
         <option value="$PROJECT_DIR$/words.txt" />
-        <option value="$PROJECT_DIR$/frontend/src/components/newTask.vue" />
         <option value="$PROJECT_DIR$/result/IL1AiihESdh.java" />
+        <option value="$PROJECT_DIR$/CodeRebuild/filetools.py" />
+        <option value="$PROJECT_DIR$/frontend/src/store/actions.js" />
+        <option value="$PROJECT_DIR$/frontend/src/components/index.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/components/history.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/components/listTask.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/components/newTask.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/components/result.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/components/userInfo.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/router/index.js" />
+        <option value="$PROJECT_DIR$/frontend/src/App.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/main.js" />
         <option value="$PROJECT_DIR$/CodeRebuild/codetools.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="85" />
     <option name="y" value="345" />
     <option name="width" value="1750" />
@@ -220,6 +210,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -232,16 +223,10 @@
               <item name="CRBS" type="462c0819:PsiDirectoryNode" />
               <item name="CodeRebuild" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="CRBS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CRBS" type="462c0819:PsiDirectoryNode" />
-              <item name="result" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -339,6 +324,8 @@
       <workItem from="1562993160116" duration="993000" />
       <workItem from="1562996161320" duration="9677000" />
       <workItem from="1563073377693" duration="16148000" />
+      <workItem from="1563105355402" duration="4561000" />
+      <workItem from="1563156248397" duration="2484000" />
     </task>
     <task id="LOCAL-00001" summary="完成了代码格式部分的编写，下面需要对其进行单元测试&#10;赵珉怿 19.6.1">
       <created>1559402469541</created>
@@ -431,11 +418,25 @@
       <option name="project" value="LOCAL" />
       <updated>1563089805056</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="修了一下括号的问题&#10;赵珉怿 7.14">
+      <created>1563105489844</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1563105489844</updated>
+    </task>
+    <task id="LOCAL-00015" summary="添加了注释文档&#10;赵珉怿 7.14">
+      <created>1563118568244</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1563118568244</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205422000" />
+    <option name="totallyTimeSpent" value="212467000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -448,9 +449,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32573727" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33512065" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -464,7 +464,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.23512748" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067025" side_tool="true" weight="0.28470254" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49932975" visible="true" weight="0.33427763" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49932975" visible="true" weight="0.33286119" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3286119" />
       <window_info anchor="bottom" id="TypeScript" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -558,13 +558,11 @@
     <MESSAGE value="修改了后端的有关注释的代码问题&#10;赵珉怿 7.12" />
     <MESSAGE value="整合了黄伟杰的代码&#10;赵珉怿 7.13" />
     <MESSAGE value="又修了个BUG&#10;赵珉怿 7.14" />
-    <option name="LAST_COMMIT_MESSAGE" value="又修了个BUG&#10;赵珉怿 7.14" />
+    <MESSAGE value="修了一下括号的问题&#10;赵珉怿 7.14" />
+    <MESSAGE value="添加了注释文档&#10;赵珉怿 7.14" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加了注释文档&#10;赵珉怿 7.14" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/result/C3UYsxwpR30.java" />
-    <entry file="file://$PROJECT_DIR$/tmp/OuCQ5Qex5jt.java" />
-    <entry file="file://$PROJECT_DIR$/result/OuCQ5Qex5jt.java" />
-    <entry file="file://$PROJECT_DIR$/result/VknXM0WT13n.java" />
     <entry file="file://$PROJECT_DIR$/tmp/VknXM0WT13n.txt" />
     <entry file="file://$PROJECT_DIR$/frontend/package.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -577,16 +575,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
           <caret line="324" selection-start-line="324" selection-end-line="324" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CodeRebuild/filetools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -605,16 +593,6 @@
         <state>
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204">
-          <caret line="24" column="28" lean-forward="true" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -657,41 +635,15 @@
     <entry file="file://$PROJECT_DIR$/tmp/K5c6Glc8Cve.java" />
     <entry file="file://$PROJECT_DIR$/result/K5c6Glc8Cve.java" />
     <entry file="file://$PROJECT_DIR$/result/xZlSiUEJuK5.java" />
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/result.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="37" column="25" lean-forward="true" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/result/4BCcEU3fKAN.java" />
     <entry file="file://$PROJECT_DIR$/tmp/0TqynBYxKsf.java" />
     <entry file="file://$PROJECT_DIR$/result/0TqynBYxKsf.java" />
     <entry file="file://$PROJECT_DIR$/tmp/4HOUhhAdUCJ.txt" />
     <entry file="file://$PROJECT_DIR$/tmp/4HOUhhAdUCJ.java" />
     <entry file="file://$PROJECT_DIR$/result/cjftHp3RKBA.java" />
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/listTask.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
-          <folding>
-            <element signature="n#Col#0;n#Row#0;n#div#0;n#template#0;n#!!top" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/result/rqVwGfQfFqv.java" />
     <entry file="file://$PROJECT_DIR$/tmp/qkB50bOYVYD.java" />
     <entry file="file://$PROJECT_DIR$/result/aMzB367HeuU.java" />
-    <entry file="file://$PROJECT_DIR$/frontend/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="75" selection-start-line="25" selection-start-column="75" selection-end-line="25" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/components/codeFragment.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1653">
@@ -699,58 +651,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/index.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#h1#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h2#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CodeRebuild/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="81" selection-start-line="81" selection-end-line="86" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CodeRebuild/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/pu1lbhqeiey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="40" column="5" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/XxEW0kSPBqs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="48" column="14" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result/PTB1BnGQaKi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="41" column="22" lean-forward="true" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/result/pu1lbhqeiey.java" />
+    <entry file="file://$PROJECT_DIR$/result/XxEW0kSPBqs.java" />
+    <entry file="file://$PROJECT_DIR$/result/PTB1BnGQaKi.java" />
     <entry file="file://$PROJECT_DIR$/tmp/0XzNHGHH0Qa.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -758,24 +661,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/result/0XzNHGHH0Qa.java">
+    <entry file="file://$PROJECT_DIR$/result/0XzNHGHH0Qa.java" />
+    <entry file="file://$PROJECT_DIR$/result/MBE0S0uV5PE.java" />
+    <entry file="file://$PROJECT_DIR$/result/IL1AiihESdh.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/keywords.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1814">
-          <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/words.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="1683" column="6" selection-start-line="1683" selection-start-column="6" selection-end-line="1683" selection-end-column="6" />
+        <state relative-caret-position="912">
+          <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -786,10 +677,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/keywords.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/words.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31977">
+          <caret line="1683" column="6" selection-start-line="1683" selection-start-column="6" selection-end-line="1683" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CodeRebuild/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1444">
+          <caret line="81" selection-start-line="81" selection-end-line="86" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CodeRebuild/filetools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/store/actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/components/newTask.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="177" column="40" selection-start-line="177" selection-start-column="40" selection-end-line="177" selection-end-column="40" />
+        <state relative-caret-position="912">
+          <caret line="48" column="22" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
           <folding>
             <element signature="n#style#0;n#Select#0;n#Form-item#0;n#Form#1;n#Row#1;n#Card#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Select#0;n#Form-item#1;n#Form#1;n#Row#1;n#Card#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -801,29 +736,98 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/result/MBE0S0uV5PE.java">
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/result.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="114">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/result/IL1AiihESdh.java">
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/userInfo.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
-          <caret line="48" column="26" lean-forward="true" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+          <folding>
+            <element signature="n#style#0;n#h1#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h2#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/history.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/listTask.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="12" column="67" selection-start-line="12" selection-start-column="67" selection-end-line="12" selection-end-column="67" />
+          <folding>
+            <element signature="n#Col#0;n#Row#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CodeRebuild/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="13" lean-forward="true" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CodeRebuild/codetools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="442" column="51" selection-start-line="442" selection-start-column="51" selection-end-line="442" selection-end-column="51" />
+        <state relative-caret-position="-1349">
+          <caret line="59" column="43" lean-forward="true" selection-start-line="59" selection-start-column="43" selection-end-line="59" selection-end-column="43" />
           <folding>
-            <element signature="e#0#168#1" />
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#866#1764#0" />
-            <element signature="e#11975#18214#0" />
+            <element signature="e#1432#1502#0" />
+            <element signature="e#1639#2539#0" />
+            <element signature="e#2748#15755#0" />
+            <element signature="e#15919#22859#0" />
+            <element signature="e#22474#22630#0" />
+            <element signature="e#22950#29638#0" />
           </folding>
         </state>
       </provider>

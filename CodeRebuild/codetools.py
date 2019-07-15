@@ -487,9 +487,9 @@ def solveFirst(code, filename, noteflag):
 
 """
 def solveSecond(code, filename):
+    # analize = filetools.checkstyle(filename,"result")
+    # 常用字字典的读取
     file1 = open(os.path.join("words.txt"), 'r', encoding='UTF-8')
-    # word列表为单词表 筛选自高频单词 用于驼峰命名法改正一些命名的问题
-    # 后期用户可以自行维护此单词表
     words = []
     line = file1.readline()
     while line:
@@ -497,9 +497,9 @@ def solveSecond(code, filename):
         words.append(line[:line.__len__() - 1])
         # words.append("'"+line+"'")
     file1.close()
-    # keyword列表定义了一些关键词 这些关键字不应当被予以修改
-    keyword = []
 
+    keyword = []
+    # JAVA关键字字典的读取
     file1 = open('keywords.txt', 'r', encoding='UTF-8')
     line = file1.readline()
     while line:
@@ -510,14 +510,17 @@ def solveSecond(code, filename):
     # print(keyword)
     # words.append('banana')
     # print(words)
+    # 存储变量名，类名，常量名，方法名
     membername = []
     classname = []
     constname = []
     methonname = []
     nochange = []
     result = []
+    # 对应的修改或的变量名等
     dict = {}
     zhushi = False
+    # 逐行处理代码 进行类型分析 不进行修改
     for codes in code:
         len = codes.__len__()
         first = True
@@ -529,6 +532,7 @@ def solveSecond(code, filename):
         first = True
         i = 0
         while i < len:
+            # 如果是变量名
             if (codes[i] >= 'a' and codes[i] <= 'z') or (codes[i] >= 'A' and codes[i] <= 'Z') \
                     or (codes[i] == '_') or codes[i] == '$':
                 tmpword = ''
@@ -537,18 +541,22 @@ def solveSecond(code, filename):
                         or (codes[i] >= '0' and codes[i] <= '9') or (codes[i] == '_') or codes[i] == '$'):
                     tmpword += codes[i]
                     i = i + 1
+                # 已经是一个类名了
                 if tmpword in classname:
                     continue
+                # class表示后面将声明一个类
                 if tmpword == 'class':
                     classflag = True
                     first = False
                     constflag = False
                     continue
+                # final 表示后面声明一个常量
                 elif tmpword == 'final':
                     constflag = True
                     classflag = False
                     first = False
                     continue
+                # 如果此时的词是一个java关键词
                 elif tmpword in keyword or first:
                     memberflag = True
                     first = False
@@ -556,24 +564,28 @@ def solveSecond(code, filename):
                 elif classflag == True:
                     classname.append(tmpword)
                     tmp1 = tmpword[:1].upper() + tmpword[1:].lower()
+                    # 在常用字词典进行查询
                     for j in words:
                         index = tmp1.find(j)
                         if index != -1:
                             pass
                         tmp1 = tmp1.replace(j, j.title())
                     dict[tmpword] = tmp1
+                    # 常量则进行全部大写
                 elif constflag == True:
                     constname.append(tmpword)
                     dict[tmpword] = tmpword.upper()
                 elif memberflag == True:
                     membername.append(tmpword)
                     tmp1 = tmpword.lower()
+                    # 变量名通过常用字词典进行驼峰命名法
                     for j in words:
                         index = tmp1[1:].find(j)
                         if index == -1:
                             continue
                         tmp1 = tmp1.replace(j, j.title())
                     dict[tmpword] = tmp1
+                # 判断是否为方法名
                 elif codes[i] == '(':
                     tmp1 = tmpword.lower()
                     for j in words:
@@ -587,6 +599,7 @@ def solveSecond(code, filename):
                     memberflag = True
             else:
                 i = i + 1
+    # 逐行读取，依据上面的额标志进行修改
     for codes in code:
         len = codes.__len__()
         first = True
@@ -596,15 +609,18 @@ def solveSecond(code, filename):
         memberflag = False
         dotflag = False
         i = 0
+        # 处理注释问题
         while i < len:
             if zhushi == True:
                 while i < len:
                     tmpresult += codes[i]
+                    # 多行注释问题
                     if i > 0 and codes[i] == '/' and codes[i - 1] == '*':
                         zhushi = False
                         i = i + 1
                         break
                     i = i + 1
+                    # 处理字符串问题
             elif codes[i] == '"':
                 tmpresult += codes[i]
                 i = i + 1
@@ -614,6 +630,7 @@ def solveSecond(code, filename):
                 tmpresult += codes[i]
                 i = i + 1
                 continue
+            # 处理当行注释
             elif i + 1 < len and codes[i] == '/' and codes[i + 1] == '/':
                 while i < len:
                     tmpresult += codes[i]
@@ -633,6 +650,8 @@ def solveSecond(code, filename):
                         or (codes[i] >= '0' and codes[i] <= '9') or (codes[i] == '_') or codes[i] == '$'):
                     tmpword += codes[i]
                     i = i + 1
+                # 判断此时词语所属的类型 且进行相应的变化
+                # 已经存在对应的字典里
                 if tmpword in keyword:
                     tmpresult += tmpword
                 elif tmpword in classname:
@@ -651,11 +670,13 @@ def solveSecond(code, filename):
                     zhushi = True
                 i = i + 1
         result.append(tmpresult)
-    print(classname)
-    print(constname)
-    print(membername)
+    # 调试输出
+    # print(classname)
+    # print(constname)
+    # print(membername)
     # filetools.writetxt(filename, "result", result)
     return result
+
 
 
 """
@@ -689,16 +710,29 @@ switch_to_if：是否需要将switch和if语句互相转换
 @output code：进行处理后的代码数组
 
 """
+
+
 def solveThird(code, filename, multiif_to_if, for_to_while, switch_to_if):
+    # 类型
     base = ['byte', 'short', 'int', 'long', 'float', 'double', 'boolean', 'char', 'integer']
+    base2 = ['byte', 'short', 'int', 'char', 'String']
+    basemp = []
+    # 用于switch case记录变量
+    tokens = {}
+    token = {}
     print("3333333333sth  !!!   code:")
     # 0:不执行，1：正向过程，-1：逆向过程
     cur = 0
+    # 分析语法
     while cur < len(code):
         if code[cur] == '' or code[cur].strip()[0] == '/':
             cur += 1
             continue
 
+        strtmp = code[cur].strip().split(' ', 1)
+        if strtmp[0] in base2:
+            basemp.append(strtmp[1].split('=|;')[0])
+        # for to while
         if for_to_while == 1:
             numkh = 0
             numyh = 0
@@ -724,15 +758,20 @@ def solveThird(code, filename, multiif_to_if, for_to_while, switch_to_if):
                         tjs[num] += strtmp[1][i]
                     i += 1
                 print(tjs)
+                if num != 2:
+                    cur += 1
+                    continue
                 j = findhkh(code, 'for', cur)
                 if tjs[0] != '':
                     code[cur] = tjs[0] + ';\nwhile(' + tjs[1] + ')' + strtmp[2]
                 else:
                     code[cur] = 'while(' + tjs[1] + ')' + strtmp[2]
+
                 if '{' not in strtmp[2]:
                     code[cur] += '\n{'
                 if tjs[2] != '':
                     code[j] = tjs[2] + ';\n' + code[j]
+        # while to for
         elif for_to_while == -1:
             if re.match('while', code[cur].strip()):
                 content = ['', '', '']
@@ -748,7 +787,7 @@ def solveThird(code, filename, multiif_to_if, for_to_while, switch_to_if):
                         code[j - 1] = ''
                 code[cur] = code[cur].split('while', 1)[0] + 'for(' + content[0] + ';' + content[1] + ';' + content[
                     2] + ')' + code[cur].rsplit(')', 1)[1]
-
+        # multiif to if
         if multiif_to_if == 1:
             numkh = 0
             numyh = 0
@@ -779,6 +818,7 @@ def solveThird(code, filename, multiif_to_if, for_to_while, switch_to_if):
                     tmpresult += 'if(' + strs + ')\n'
                 tmpresult += strtmp[2]
                 code[cur] = tmpresult
+        # if to multiif
         elif multiif_to_if == -1:
             if re.match('if', code[cur].strip()):
                 if re.match('if', code[cur + 1].strip()):
@@ -793,9 +833,36 @@ def solveThird(code, filename, multiif_to_if, for_to_while, switch_to_if):
                     cur += 1
 
         cur += 1
-    # for codes in code:
-    #     print(codes)
+        # switch to if
+        if switch_to_if == 1:
+            if re.match('switch', code[cur].strip()):
+                token[code[cur].split('switch', 1)[0] + '    '] = code[cur].split('(', 1)[1].rsplit(')', 1)[0]
+                en = findhkh(code, 'switch', cur)
+                code[cur] = '{'
+                if re.match('{', code[cur + 1].strip()):
+                    code[cur + 1] = ''
+                # code[en]=''
+            elif re.match('case', code[cur].strip()):
+                if tokens[code[cur].split('case', 1)[0] + '  '] == '':
+                    tokens[code[cur].split('case', 1)[0] + '  '] += token[code[cur].split('case', 1)[0] + '  '] + '==' + \
+                                                                    code[cur].split('(', 1)[1].rsplit(')', 1)[0]
+                else:
+                    tokens[code[cur].split('case', 1)[0] + '  '] += '||' + token[
+                        code[cur].split('case', 1)[0] + '  '] + '==' + code[cur].split('(', 1)[1].rsplit(')', 1)[0]
+                code[cur] = '}\nif(' + tokens[code[cur].split('case', 1)[0] + '  '] + ')\n{'
+            elif re.match('break;', code[cur].strip()):
+                tmp = code[cur].split('break;', 1)[0]
+                tokens[tmp] = ''
+                while not (re.match('case', code[cur + 1].strip()) and code[cur + 1].split('case', 1)[0] + '  ' == tmp):
+                    code[cur] = ''
+                    cur += 1
+        # if to switch
+        elif switch_to_if == -1:
+            if re.match('if', code[cur].strip()):
+                en = findhkh(code, 'if', cur)
+
+    for codes in code:
+        print(codes)
     filetools.writetxt(filename, "result", code)
-    code = filetools.readCode(filename, "result")
     # analize = filetools.checkstyle(filename,"result")
     return code
